@@ -2,209 +2,900 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ibarra Civic Radar</title>
+<title>Poribarratodo - Monitor de Conversación Pública</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#132029;
-    --ink-soft:#1e313d;
-    --paper:#EEEFE7;
-    --paper-raised:#F7F7F1;
-    --line:#D8D9CE;
-    --teal:#2F7A72;
-    --teal-soft:#DCEAE6;
-    --blue:#4C6B8A;
-    --blue-soft:#E1E7EE;
-    --amber:#C97A2E;
-    --amber-soft:#F5E3CD;
-    --text:#1B2630;
-    --muted:#5B6670;
-    --muted-2:#8A9198;
+  :root {
+    --primary: #2F7A72;
+    --primary-light: #DCEAE6;
+    --secondary: #4C6B8A;
+    --secondary-light: #E1E7EE;
+    --accent: #C97A2E;
+    --accent-light: #F5E3CD;
+    --ink: #132029;
+    --ink-soft: #1e313d;
+    --paper: #EEEFE7;
+    --paper-raised: #F7F7F1;
+    --line: #D8D9CE;
+    --text: #1B2630;
+    --muted: #5B6670;
+    --muted-2: #8A9198;
+    --success: #2F7A72;
+    --warning: #C97A2E;
+    --danger: #A94D44;
+    --info: #4C6B8A;
   }
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--text);font-family:'Source Serif 4', serif;line-height:1.5;}
-  .mono{font-family:'IBM Plex Mono', monospace;}
-  .disp{font-family:'Space Grotesk', sans-serif;}
-  a{color:var(--teal);}
 
-  /* ===== HERO / RADAR ===== */
-  .hero{
-    background:radial-gradient(circle at 78% 30%, #1c3540 0%, var(--ink) 55%, #0e1820 100%);
-    color:#EFEFE7;
-    padding:44px 5vw 36px 5vw;
-    position:relative;
-    overflow:hidden;
-    border-bottom:3px solid var(--teal);
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Source Serif 4', serif;
+    line-height: 1.6;
   }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    font-size:.72rem;
-    color:#8FCFC2;
-    margin-bottom:10px;
-  }
-  .hero h1{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:clamp(2rem, 4.4vw, 3.2rem);
-    margin:0 0 8px 0;
-    font-weight:700;
-    letter-spacing:-0.01em;
-  }
-  .hero-sub{max-width:640px;color:#C8D2CE;font-size:1.02rem;margin-bottom:22px;}
-  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;align-items:center;}
-  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;}}
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .disp { font-family: 'Space Grotesk', sans-serif; }
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
 
-  .radar-wrap{display:flex;justify-content:center;align-items:center;}
-  .radar-sweep{animation:spin 6s linear infinite; transform-origin:150px 150px;}
-  @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-  @media (prefers-reduced-motion: reduce){.radar-sweep{animation:none;}}
-  .blip{animation:pulse 2.4s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:.55;}50%{opacity:1;}}
-
-  .methodology{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.14);
-    border-left:3px solid #8FCFC2;
-    border-radius:6px;
-    padding:16px 18px;
-    font-size:.88rem;
-    color:#D8DFDB;
-    margin-top:18px;
+  /* ===== HERO ===== */
+  .hero {
+    background: radial-gradient(circle at 78% 30%, #1c3540 0%, var(--ink) 55%, #0e1820 100%);
+    color: #EFEFE7;
+    padding: 32px 5vw 28px 5vw;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--primary);
   }
-  .methodology b{color:#fff;}
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero { padding: 24px 5vw; }
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: #8FCFC2;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    max-width: 640px;
+    color: #C8D2CE;
+    font-size: 1.02rem;
+    margin-bottom: 16px;
+  }
+  .radar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .radar-sweep {
+    animation: spin 6s linear infinite;
+    transform-origin: 150px 150px;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .radar-sweep { animation: none; }
+  }
+  .blip {
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
 
   /* ===== LAYOUT ===== */
-  .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh;}
-  @media(max-width:900px){.app{grid-template-columns:1fr;}}
-
-  .sidebar{
-    background:var(--ink-soft);
-    color:#DCE3DF;
-    padding:22px 18px;
-    position:sticky;
-    top:0;
-    align-self:start;
-    height:100vh;
-    overflow-y:auto;
+  .app {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
   }
-  @media(max-width:900px){.sidebar{position:relative;height:auto;}}
-  .sidebar h3{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:.78rem;
-    text-transform:uppercase;
-    letter-spacing:.12em;
-    color:#8FCFC2;
-    margin:0 0 14px 0;
-    border-bottom:1px solid rgba(255,255,255,.12);
-    padding-bottom:8px;
+  @media (max-width: 1000px) {
+    .app { grid-template-columns: 1fr; }
   }
-  .field{margin-bottom:16px;}
-  .field label{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:#9FB0AB;margin-bottom:5px;font-family:'IBM Plex Mono',monospace;}
-  select, input[type=date]{
-    width:100%;
-    background:#0F1B22;
-    color:#EFEFE7;
-    border:1px solid #2C4048;
-    border-radius:5px;
-    padding:8px 9px;
-    font-size:.86rem;
-    font-family:'IBM Plex Mono',monospace;
+
+  /* ===== SIDEBAR / NAVIGATION ===== */
+  .sidebar {
+    background: var(--ink-soft);
+    color: #DCE3DF;
+    padding: 20px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .reset-btn{
-    width:100%;
-    margin-top:4px;
-    background:transparent;
-    border:1px solid #4C6B5F;
-    color:#8FCFC2;
-    padding:9px;
-    border-radius:5px;
-    cursor:pointer;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:.82rem;
-    transition:.15s;
+  @media (max-width: 1000px) {
+    .sidebar {
+      position: relative;
+      height: auto;
+      display: none;
+    }
+    .sidebar.active {
+      display: block;
+    }
   }
-  .reset-btn:hover{background:#8FCFC2;color:#0F1B22;}
-  .filter-count{
-    margin-top:18px;
-    padding:12px;
-    background:rgba(143,207,194,0.08);
-    border-radius:6px;
-    font-size:.82rem;
-    color:#B9C7C2;
+  .sidebar h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8FCFC2;
+    margin: 0 0 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 8px;
   }
-  .filter-count .n{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:#fff;display:block;}
+  .nav-section {
+    margin-bottom: 20px;
+  }
+  .nav-item {
+    display: block;
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    background: transparent;
+    border: none;
+    color: #B9C7C2;
+    text-align: left;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+    font-family: 'Space Grotesk', sans-serif;
+    width: 100%;
+  }
+  .nav-item:hover {
+    background: rgba(143, 207, 194, 0.1);
+    color: #8FCFC2;
+  }
+  .nav-item.active {
+    background: rgba(143, 207, 194, 0.2);
+    color: #8FCFC2;
+    font-weight: 600;
+  }
 
-  main{padding:32px 5vw 80px 5vw;max-width:1180px;}
+  .field {
+    margin-bottom: 14px;
+  }
+  .field label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #9FB0AB;
+    margin-bottom: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  select, input[type="date"], input[type="file"] {
+    width: 100%;
+    background: #0F1B22;
+    color: #EFEFE7;
+    border: 1px solid #2C4048;
+    border-radius: 5px;
+    padding: 8px 9px;
+    font-size: 0.86rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  input[type="file"] {
+    padding: 6px;
+  }
+  .btn-primary {
+    width: 100%;
+    margin-top: 4px;
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    color: white;
+    padding: 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: 0.15s;
+  }
+  .btn-primary:hover {
+    background: #1f6058;
+    border-color: #1f6058;
+  }
+  .btn-secondary {
+    width: 100%;
+    margin-top: 4px;
+    background: transparent;
+    border: 1px solid #4C6B5F;
+    color: #8FCFC2;
+    padding: 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    transition: 0.15s;
+  }
+  .btn-secondary:hover {
+    background: #8FCFC2;
+    color: #0F1B22;
+  }
 
-  section{margin-bottom:52px;}
-  .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;border-bottom:2px solid var(--ink);padding-bottom:8px;}
-  .sec-num{font-family:'IBM Plex Mono',monospace;color:var(--teal);font-size:.85rem;}
-  .sec-head h2{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin:0;}
-  .sec-note{color:var(--muted);font-size:.86rem;margin-top:-8px;margin-bottom:16px;}
+  .filter-count {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(143, 207, 194, 0.08);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: #B9C7C2;
+  }
+  .filter-count .n {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    display: block;
+    margin-bottom: 4px;
+  }
 
-  /* KPI */
-  .kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:26px 0 40px 0;}
-  @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
-  .kpi{background:var(--paper-raised);border:1px solid var(--line);border-radius:8px;padding:14px 14px;}
-  .kpi .v{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--ink);}
-  .kpi .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-top:2px;}
-  .kpi.alert .v{color:var(--amber);}
+  .status-bar {
+    background: rgba(143, 207, 194, 0.08);
+    border-left: 3px solid var(--primary);
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: #B9C7C2;
+  }
+  .status-bar .timestamp {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #8FCFC2;
+    font-weight: 600;
+  }
 
-  .card{background:var(--paper-raised);border:1px solid var(--line);border-radius:10px;padding:20px;}
-  .chart-box{height:280px;position:relative;}
-  .chart-box.small{height:220px;}
+  /* ===== MAIN CONTENT ===== */
+  main {
+    padding: 32px 5vw 80px 5vw;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  @media(max-width:880px){.grid2{grid-template-columns:1fr;}}
+  .section {
+    margin-bottom: 48px;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+  }
+  .sec-num {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .sec-head h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--ink);
+  }
+  .sec-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
 
-  ul.clean{margin:0;padding-left:18px;}
-  ul.clean li{margin-bottom:7px;}
+  /* ===== KPI ===== */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 24px 0 40px 0;
+  }
+  .kpi {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 14px;
+    transition: 0.2s;
+  }
+  .kpi:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(47, 122, 114, 0.1);
+  }
+  .kpi .v {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .kpi .l {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 4px;
+  }
+  .kpi.alert .v { color: var(--accent); }
+  .kpi.success .v { color: var(--success); }
+  .kpi.info .v { color: var(--info); }
 
-  /* Timeline */
-  .timeline{border-left:2px solid var(--line);margin-left:8px;padding-left:22px;}
-  .tl-item{position:relative;margin-bottom:22px;}
-  .tl-item::before{content:'';position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--teal);border:2px solid var(--paper);box-shadow:0 0 0 2px var(--teal);}
-  .tl-date{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--teal);font-weight:600;}
-  .tl-title{font-family:'Space Grotesk',sans-serif;font-weight:600;margin:2px 0 4px 0;}
-  .tl-source{font-size:.78rem;color:var(--muted-2);font-family:'IBM Plex Mono',monospace;}
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.2s;
+  }
+  .card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
 
-  /* News cards */
-  .news-list{display:flex;flex-direction:column;gap:12px;}
-  .news-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;grid-template-columns:110px 1fr auto;gap:16px;align-items:start;}
-  @media(max-width:700px){.news-card{grid-template-columns:1fr;}}
-  .news-card .date{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);}
-  .news-card .tag{display:inline-block;background:var(--teal-soft);color:var(--teal);font-size:.68rem;font-family:'IBM Plex Mono',monospace;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px;}
-  .news-card .src{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.92rem;}
-  .news-card p{margin:4px 0 0 0;font-size:.92rem;color:var(--text);}
-  .news-card a.link{font-size:.78rem;white-space:nowrap;align-self:center;}
+  .chart-box {
+    height: 300px;
+    position: relative;
+  }
+  .chart-box.small {
+    height: 220px;
+  }
 
-  /* narrative map */
-  .narrative-wrap{display:flex;justify-content:center;}
-  .node{position:absolute;text-align:center;}
-  .node .bubble{border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;margin:0 auto;}
-  .node .lbl{font-size:.72rem;margin-top:6px;font-family:'IBM Plex Mono',monospace;color:var(--text);max-width:120px;}
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 1000px) {
+    .grid2 { grid-template-columns: 1fr; }
+  }
 
-  /* alerts */
-  .alert-item{display:flex;gap:12px;background:var(--amber-soft);border:1px solid #E0BE8F;border-radius:8px;padding:12px 14px;margin-bottom:10px;}
-  .alert-item .ico{color:var(--amber);font-family:'Space Grotesk',sans-serif;font-weight:700;}
-  .alert-item .txt{font-size:.88rem;}
-  .alert-item .txt .src{font-weight:600;font-family:'Space Grotesk',sans-serif;}
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
 
-  .empty-state{background:var(--blue-soft);border:1px dashed var(--blue);border-radius:8px;padding:18px;color:#2F4359;font-size:.92rem;}
+  /* ===== SECTION NAVIGATION ===== */
+  .section-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: 0.2s;
+  }
+  .tab-btn:hover {
+    border-color: var(--primary);
+    background: rgba(47, 122, 114, 0.05);
+  }
+  .tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
 
-  .limits-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  @media(max-width:880px){.limits-grid{grid-template-columns:1fr;}}
-  .limit-card{background:var(--paper-raised);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;font-size:.87rem;}
-  .limit-card b{font-family:'Space Grotesk',sans-serif;display:block;margin-bottom:3px;font-size:.9rem;}
+  /* ===== RADAR/TREND INDICATORS ===== */
+  .trend-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-right: 6px;
+  }
+  .trend-up {
+    background: rgba(47, 122, 114, 0.2);
+    color: var(--success);
+  }
+  .trend-stable {
+    background: rgba(76, 107, 138, 0.2);
+    color: var(--info);
+  }
+  .trend-down {
+    background: rgba(201, 122, 46, 0.2);
+    color: var(--accent);
+  }
+  .trend-emerging {
+    background: rgba(169, 77, 68, 0.2);
+    color: var(--danger);
+  }
+  .trend-isolated {
+    background: rgba(138, 145, 152, 0.2);
+    color: var(--muted-2);
+  }
 
-  footer{padding:26px 5vw;background:var(--ink);color:#93A29B;font-size:.78rem;font-family:'IBM Plex Mono',monospace;}
-  footer a{color:#8FCFC2;}
+  /* ===== HEATMAP GRID ===== */
+  .heatmap-container {
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .heatmap-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    padding: 1px;
+    min-width: 600px;
+  }
+  .heatmap-header {
+    background: var(--ink);
+    color: white;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .heatmap-row {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+  }
+  .heatmap-cell {
+    background: white;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    min-width: 60px;
+  }
+  .heatmap-cell.label {
+    background: var(--paper);
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .heatmap-cell.heat-0 { background: #f5f5f5; color: #999; }
+  .heatmap-cell.heat-1 { background: #E8F5E9; color: #2E7D32; }
+  .heatmap-cell.heat-2 { background: #C8E6C9; color: #1B5E20; }
+  .heatmap-cell.heat-3 { background: #81C784; color: white; }
+  .heatmap-cell.heat-4 { background: #4CAF50; color: white; }
+  .heatmap-cell.heat-5 { background: #2E7D32; color: white; }
 
-  .badge-verify{display:inline-block;font-size:.68rem;font-family:'IBM Plex Mono',monospace;background:var(--amber-soft);color:var(--amber);padding:1px 6px;border-radius:4px;margin-left:6px;}
+  /* ===== PLATFORM RADAR ===== */
+  .platform-radar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .radar-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+    border-left: 4px solid var(--primary);
+  }
+  .radar-card.instagram { border-left-color: #E1306C; }
+  .radar-card.facebook { border-left-color: #1877F2; }
+  .radar-card.tiktok { border-left-color: #000; }
+  .radar-card.medios { border-left-color: var(--secondary); }
+
+  .radar-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    margin: 0 0 12px 0;
+    color: var(--ink);
+  }
+  .radar-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  .radar-stat:last-child { border-bottom: none; }
+  .radar-stat .label { color: var(--muted); }
+  .radar-stat .value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ===== TONE RECOMMENDATIONS ===== */
+  .tone-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .tone-table th {
+    background: var(--paper);
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    border-bottom: 2px solid var(--line);
+    font-size: 0.9rem;
+  }
+  .tone-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  .tone-table tr:hover {
+    background: rgba(47, 122, 114, 0.03);
+  }
+  .tone-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 6px 0;
+  }
+  .tone-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    border-left: 2px solid var(--line);
+    margin-left: 8px;
+    padding-left: 22px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 4px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  .tl-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .tl-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    margin: 2px 0 4px 0;
+    color: var(--ink);
+  }
+  .tl-content {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin: 6px 0;
+  }
+  .tl-source {
+    font-size: 0.78rem;
+    color: var(--muted-2);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* ===== NEWS CARDS ===== */
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .news-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    transition: 0.2s;
+  }
+  .news-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(47, 122, 114, 0.08);
+  }
+  .news-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .news-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .news-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .news-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 3px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .news-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 6px 0;
+    color: var(--ink);
+  }
+  .news-source {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+  .news-content {
+    font-size: 0.92rem;
+    color: var(--text);
+    margin: 8px 0;
+    line-height: 1.5;
+  }
+  .news-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+  }
+  .news-link {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .verification-status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .status-verified {
+    background: rgba(47, 122, 114, 0.2);
+    color: var(--success);
+  }
+  .status-pending {
+    background: rgba(201, 122, 46, 0.2);
+    color: var(--accent);
+  }
+  .status-flag {
+    background: rgba(169, 77, 68, 0.2);
+    color: var(--danger);
+  }
+
+  /* ===== NARRATIVE MAP ===== */
+  .narrative-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .narrative-svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ===== ALERTS ===== */
+  .alert-item {
+    display: flex;
+    gap: 12px;
+    background: var(--accent-light);
+    border: 1px solid #E0BE8F;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .alert-item .ico {
+    color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .alert-item .txt {
+    font-size: 0.88rem;
+    flex-grow: 1;
+  }
+  .alert-item .src {
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .empty-state {
+    background: var(--secondary-light);
+    border: 1px dashed var(--secondary);
+    border-radius: 8px;
+    padding: 20px;
+    color: #2F4359;
+    font-size: 0.92rem;
+    text-align: center;
+  }
+
+  .limits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 900px) {
+    .limits-grid { grid-template-columns: 1fr; }
+  }
+  .limit-card {
+    background: var(--paper-raised);
+    border-left: 3px solid var(--info);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 0.87rem;
+  }
+  .limit-card b {
+    font-family: 'Space Grotesk', sans-serif;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 26px 5vw;
+    background: var(--ink);
+    color: #93A29B;
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  footer a {
+    color: #8FCFC2;
+  }
+
+  /* ===== BADGES ===== */
+  .badge-verify {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-weight: 600;
+  }
+
+  .badge-data-quality {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 2px;
+    font-weight: 600;
+  }
+
+  /* ===== MODALS ===== */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 28px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--muted);
+  }
+
+  /* ===== LOADING ===== */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(47, 122, 114, 0.2);
+    border-top: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: spin-loader 0.8s linear infinite;
+  }
+  @keyframes spin-loader {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 900px) {
+    .app {
+      grid-template-columns: 1fr;
+    }
+    main {
+      padding: 20px 4vw 60px 4vw;
+    }
+    .grid2, .grid3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+    .hero-grid {
+      gap: 16px;
+    }
+    .kpi-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .news-card-header {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .news-footer {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+  }
 </style>
 </head>
 <body>
@@ -212,15 +903,12 @@
 <div class="hero">
   <div class="hero-grid">
     <div>
-      <div class="eyebrow">Monitor de conversación pública &amp; cobertura mediática</div>
-      <h1>IBARRA CIVIC RADAR</h1>
-      <div class="hero-sub">Panel analítico sobre la cobertura periodística pública relacionada con la precandidatura de Juan Fernando Arias Carvajal a la Alcaldía de Ibarra. Enfoque académico, descriptivo y no persuasivo.</div>
-      <div class="methodology">
-        <b>Nota metodológica.</b> Este sistema analiza <b>conversación digital pública y cobertura mediática ya publicada</b>, a partir de un conjunto acotado de registros verificables con fuente y enlace original. No mide ni representa la opinión del conjunto de la ciudadanía de Ibarra, no realiza segmentación de votantes, no infiere intención de voto ni genera recomendaciones de mensajes o persuasión electoral. Los datos que no pudieron corroborarse se marcan explícitamente como <b>"requiere verificación"</b>.
-      </div>
+      <div class="eyebrow">Monitor de conversación pública local</div>
+      <h1>PORIBARRATODO</h1>
+      <div class="hero-sub">Panel analítico de cobertura mediática, redes sociales y conversación pública local. Enfoque académico y de inteligencia competitiva.</div>
     </div>
     <div class="radar-wrap">
-      <svg width="300" height="300" viewBox="0 0 300 300">
+      <svg width="280" height="280" viewBox="0 0 300 300" class="radar-svg">
         <circle cx="150" cy="150" r="130" fill="none" stroke="#2C4048" stroke-width="1"/>
         <circle cx="150" cy="150" r="95" fill="none" stroke="#2C4048" stroke-width="1"/>
         <circle cx="150" cy="150" r="58" fill="none" stroke="#2C4048" stroke-width="1"/>
@@ -230,22 +918,10 @@
         <g class="radar-sweep">
           <path d="M150,150 L150,20 A130,130 0 0,1 240,72 Z" fill="#8FCFC2" opacity="0.16"/>
         </g>
-        <!-- blips placed roughly per chronology of the 15 records -->
         <circle class="blip" cx="150" cy="45" r="4" fill="#8FCFC2"/>
         <circle class="blip" cx="120" cy="55" r="4" fill="#8FCFC2" style="animation-delay:.3s"/>
         <circle class="blip" cx="175" cy="60" r="4" fill="#8FCFC2" style="animation-delay:.6s"/>
         <circle class="blip" cx="200" cy="80" r="4" fill="#8FCFC2" style="animation-delay:.9s"/>
-        <circle class="blip" cx="95" cy="95" r="4" fill="#C97A2E" style="animation-delay:1.1s"/>
-        <circle class="blip" cx="215" cy="120" r="4" fill="#8FCFC2" style="animation-delay:1.4s"/>
-        <circle class="blip" cx="70" cy="140" r="4" fill="#8FCFC2" style="animation-delay:1.7s"/>
-        <circle class="blip" cx="225" cy="165" r="4" fill="#8FCFC2" style="animation-delay:2s"/>
-        <circle class="blip" cx="80" cy="190" r="4" fill="#8FCFC2" style="animation-delay:2.3s"/>
-        <circle class="blip" cx="205" cy="210" r="4" fill="#C97A2E" style="animation-delay:.5s"/>
-        <circle class="blip" cx="130" cy="230" r="4" fill="#8FCFC2" style="animation-delay:1.2s"/>
-        <circle class="blip" cx="170" cy="235" r="4" fill="#8FCFC2" style="animation-delay:1.9s"/>
-        <circle class="blip" cx="150" cy="250" r="4" fill="#8FCFC2" style="animation-delay:.8s"/>
-        <circle class="blip" cx="105" cy="220" r="4" fill="#8FCFC2" style="animation-delay:1.6s"/>
-        <circle class="blip" cx="185" cy="185" r="4" fill="#8FCFC2" style="animation-delay:2.1s"/>
         <circle cx="150" cy="150" r="4" fill="#EFEFE7"/>
       </svg>
     </div>
@@ -254,18 +930,32 @@
 
 <div class="app">
   <aside class="sidebar">
-    <h3>Filtros</h3>
+    <h3>📊 Navegación</h3>
+    <div class="nav-section" id="nav-main"></div>
+
+    <h3 style="margin-top:22px;">🔧 Datos</h3>
+    <div class="field">
+      <label>Cargar CSV</label>
+      <input type="file" id="csv-upload" accept=".csv">
+    </div>
+    <button class="btn-primary" id="load-csv-btn">Actualizar datos</button>
+    <div class="status-bar" id="status-bar" style="display:none;">
+      <div>✓ Datos actualizados</div>
+      <div class="timestamp" id="last-update"></div>
+    </div>
+
+    <h3 style="margin-top:22px;">🔍 Filtros</h3>
+    <div class="field">
+      <label>Plataforma</label>
+      <select id="f-plataforma"><option value="">Todas</option></select>
+    </div>
+    <div class="field">
+      <label>Tema</label>
+      <select id="f-tema"><option value="">Todos</option></select>
+    </div>
     <div class="field">
       <label>Fuente</label>
       <select id="f-fuente"><option value="">Todas</option></select>
-    </div>
-    <div class="field">
-      <label>Categoría temática</label>
-      <select id="f-categoria"><option value="">Todas</option></select>
-    </div>
-    <div class="field">
-      <label>Tipo de registro</label>
-      <select id="f-tipo"><option value="">Todos</option></select>
     </div>
     <div class="field">
       <label>Desde</label>
@@ -275,172 +965,211 @@
       <label>Hasta</label>
       <input type="date" id="f-hasta">
     </div>
-    <button class="reset-btn" id="reset">Limpiar filtros</button>
+    <button class="btn-secondary" id="reset">Limpiar filtros</button>
+
     <div class="filter-count">
-      <span class="n" id="count-visible">15</span>
-      registros visibles de 15 en el conjunto de datos
-    </div>
-    <h3 style="margin-top:26px;">Fuentes en el dataset</h3>
-    <ul class="clean" style="font-size:.78rem;color:#B9C7C2;">
-      <li>La Hora</li>
-      <li>Primera Zona</li>
-      <li>Diario El Norte</li>
-      <li>Expectativa</li>
-      <li>OMCE Medios</li>
-    </ul>
-    <div style="font-size:.72rem;color:#7E8E88;margin-top:10px;">
-      No se localizaron en el archivo publicaciones atribuibles a las cuentas sociales indicadas en la solicitud (poribarratodo, juanariasec, ibarraconjuanarias). Ver sección 7 y limitaciones.
+      <span class="n" id="count-visible">0</span>
+      <div>registros visibles</div>
     </div>
   </aside>
 
   <main>
-
-    <!-- KPIs -->
+    <!-- KPIs Dashboard -->
     <div class="kpi-row" id="kpi-row"></div>
 
-    <!-- 1. RESUMEN EJECUTIVO -->
-    <section id="sec1">
-      <div class="sec-head"><span class="sec-num">01</span><h2>Resumen ejecutivo</h2></div>
+    <!-- Main Navigation Tabs -->
+    <div class="section-tabs" id="section-tabs"></div>
+
+    <!-- 01. DASHBOARD / ¿QUÉ ESTÁ CAMBIANDO? -->
+    <section id="sec-dashboard" class="section">
+      <div class="sec-head"><span class="sec-num">01</span><h2>¿Qué está cambiando?</h2></div>
+      <div class="sec-note">Comparación período actual vs período anterior. Detecta tendencias emergentes.</div>
+      <div class="card" id="dashboard-content"></div>
+    </section>
+
+    <!-- 02. TENDENCIAS LOCALES -->
+    <section id="sec-tendencias" class="section">
+      <div class="sec-head"><span class="sec-num">02</span><h2>Radar de tendencias locales</h2></div>
+      <div class="sec-note">Análisis de temas por plataforma. Clasificación de tendencias crecientes, estables, decrecientes y emergentes.</div>
+      
+      <div class="field" style="margin-bottom: 20px;">
+        <label>Período temporal</label>
+        <select id="trend-period">
+          <option value="24h">Últimas 24 horas</option>
+          <option value="7d" selected>Últimos 7 días</option>
+          <option value="14d">Últimos 14 días</option>
+          <option value="30d">Últimos 30 días</option>
+        </select>
+      </div>
+
       <div class="card">
-        <p id="resumen-texto" style="margin-top:0;"></p>
-        <ul class="clean" id="resumen-bullets"></ul>
+        <div id="trends-content" style="min-height: 300px;"></div>
       </div>
     </section>
 
-    <!-- 2 & 5: Volumen + Ranking -->
-    <section id="sec2">
-      <div class="sec-head"><span class="sec-num">02 · 05</span><h2>Volumen de publicaciones y ranking temático</h2></div>
-      <div class="sec-note">Conteo de registros por fecha de publicación y por categoría temática (incluye categorías emergentes detectadas fuera de la taxonomía inicial).</div>
-      <div class="grid2">
-        <div class="card"><div class="chart-box"><canvas id="chartVolumen"></canvas></div></div>
-        <div class="card"><div class="chart-box"><canvas id="chartRanking"></canvas></div></div>
+    <!-- 03. MAPA DE CALOR TEMÁTICO -->
+    <section id="sec-heatmap" class="section">
+      <div class="sec-head"><span class="sec-num">03</span><h2>Mapa de calor temático</h2></div>
+      <div class="sec-note">Cruce de temas × plataformas. Selecciona la métrica que deseas visualizar.</div>
+
+      <div class="field" style="margin-bottom: 20px;">
+        <label>Métrica del mapa</label>
+        <select id="heatmap-metric">
+          <option value="count">Número de publicaciones</option>
+          <option value="interactions">Interacciones</option>
+          <option value="comments">Comentarios</option>
+          <option value="shares">Compartidos</option>
+          <option value="views">Visualizaciones</option>
+          <option value="relevance">Relevancia</option>
+        </select>
       </div>
-    </section>
 
-    <!-- 3. Evolución de temas -->
-    <section id="sec3">
-      <div class="sec-head"><span class="sec-num">03</span><h2>Evolución de los principales temas</h2></div>
-      <div class="sec-note">Agrupación semanal de registros por categoría temática macro, dentro del rango filtrado.</div>
-      <div class="card"><div class="chart-box"><canvas id="chartEvolucion"></canvas></div></div>
-    </section>
-
-    <!-- 4. Tono -->
-    <section id="sec4">
-      <div class="sec-head"><span class="sec-num">04</span><h2>Distribución de sentimiento / tono</h2></div>
-      <div class="sec-note">El campo de origen "sentimiento" figura como <b>"No inferido"</b> en el 100% de los registros del archivo. Por regla de análisis, no se inventa ni infiere tono a partir de titulares o resúmenes; se reporta la ausencia del dato.</div>
-      <div class="grid2">
-        <div class="card"><div class="chart-box small"><canvas id="chartTono"></canvas></div></div>
-        <div class="card">
-          <div class="empty-state">
-            <b>Sin base para clasificar tono.</b> Clasificar automáticamente el tono de una nota periodística o publicación exige leer el contenido completo, no solo el resumen. Presentar una distribución de tono aquí implicaría inventar un dato no disponible, algo que estas reglas de análisis prohíben expresamente. Se recomienda anotación manual sobre el texto íntegro de cada fuente si este indicador es prioritario.
-          </div>
+      <div class="card">
+        <div class="heatmap-container">
+          <div class="heatmap-grid" id="heatmap-grid" style="grid-template-columns: 120px repeat(4, 1fr); grid-auto-rows: auto;"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--muted); margin-top: 12px; text-align: right;">
+          Escala: blanco (0) → verde claro (bajo) → verde oscuro (alto)
         </div>
       </div>
     </section>
 
-    <!-- 6. Línea de tiempo -->
-    <section id="sec6">
-      <div class="sec-head"><span class="sec-num">06</span><h2>Línea temporal de acontecimientos relevantes</h2></div>
-      <div class="sec-note">Orden cronológico de los registros dentro del filtro activo.</div>
+    <!-- 04. INSTAGRAM RADAR -->
+    <section id="sec-instagram" class="section">
+      <div class="sec-head"><span class="sec-num">04</span><h2>📷 Instagram Radar</h2></div>
+      <div id="instagram-content" style="min-height: 200px;"></div>
+    </section>
+
+    <!-- 05. FACEBOOK RADAR -->
+    <section id="sec-facebook" class="section">
+      <div class="sec-head"><span class="sec-num">05</span><h2>👥 Facebook Radar</h2></div>
+      <div id="facebook-content" style="min-height: 200px;"></div>
+    </section>
+
+    <!-- 06. TIKTOK RADAR -->
+    <section id="sec-tiktok" class="section">
+      <div class="sec-head"><span class="sec-num">06</span><h2>🎵 TikTok Radar</h2></div>
+      <div id="tiktok-content" style="min-height: 200px;"></div>
+    </section>
+
+    <!-- 07. COMPARATIVA PLATAFORMAS -->
+    <section id="sec-comparativa" class="section">
+      <div class="sec-head"><span class="sec-num">07</span><h2>Comparativa de plataformas</h2></div>
+      <div class="sec-note">Análisis comparativo: Instagram vs Facebook vs TikTok vs Medios digitales.</div>
+      <div class="grid2">
+        <div class="card"><div class="chart-box"><canvas id="chartComparativa"></canvas></div></div>
+        <div class="card"><div class="chart-box"><canvas id="chartTemasPorPlataforma"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- 08. TONO RECOMENDADO -->
+    <section id="sec-tono" class="section">
+      <div class="sec-head"><span class="sec-num">08</span><h2>Tono recomendado para comunicación pública</h2></div>
+      <div class="sec-note">Análisis observacional de contexto → sugerencias de tono general para abordar públicamente cada tema.</div>
+      <div class="card">
+        <table class="tone-table" id="tone-table"></table>
+      </div>
+    </section>
+
+    <!-- 09. VOLUMEN Y EVOLUCIÓN -->
+    <section id="sec-volumen" class="section">
+      <div class="sec-head"><span class="sec-num">09</span><h2>Volumen de publicaciones y evolución</h2></div>
+      <div class="grid2">
+        <div class="card"><div class="chart-box"><canvas id="chartVolumen"></canvas></div></div>
+        <div class="card"><div class="chart-box"><canvas id="chartEvolucion"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- 10. RANKING TEMÁTICO -->
+    <section id="sec-ranking" class="section">
+      <div class="sec-head"><span class="sec-num">10</span><h2>Ranking de temas y sentimiento</h2></div>
+      <div class="grid2">
+        <div class="card"><div class="chart-box small"><canvas id="chartRanking"></canvas></div></div>
+        <div class="card"><div class="chart-box small"><canvas id="chartTono"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- 11. MAPA DE NARRATIVAS -->
+    <section id="sec-narrativas" class="section">
+      <div class="sec-head"><span class="sec-num">11</span><h2>Mapa de narrativas dinámico</h2></div>
+      <div class="sec-note">Relación temática: TEMA → PLATAFORMA → PUBLICACIÓN → EVIDENCIA</div>
+      <div class="card">
+        <div class="narrative-wrap">
+          <svg id="narrative-svg" width="640" height="360" viewBox="0 0 640 360" class="narrative-svg"></svg>
+        </div>
+        <div id="narrative-detail" style="margin-top: 14px;"></div>
+      </div>
+    </section>
+
+    <!-- 12. NOTICIAS RELEVANTES -->
+    <section id="sec-noticias" class="section">
+      <div class="sec-head"><span class="sec-num">12</span><h2>Noticias y publicaciones relevantes</h2></div>
+      <div class="sec-note">Ordenadas por fecha. Cada registro conserva su fuente, URL y estado de verificación.</div>
+      <div class="news-list" id="news-list"></div>
+    </section>
+
+    <!-- 13. VERIFICACIÓN -->
+    <section id="sec-verificacion" class="section">
+      <div class="sec-head"><span class="sec-num">13</span><h2>Alertas sobre información que requiere verificación</h2></div>
+      <div id="alerts-list"></div>
+    </section>
+
+    <!-- 14. LÍNEA TEMPORAL -->
+    <section id="sec-timeline" class="section">
+      <div class="sec-head"><span class="sec-num">14</span><h2>Línea temporal de acontecimientos</h2></div>
       <div class="card">
         <div class="timeline" id="timeline"></div>
       </div>
     </section>
 
-    <!-- 7. Redes vs medios -->
-    <section id="sec7">
-      <div class="sec-head"><span class="sec-num">07</span><h2>Comparación entre redes sociales y medios de comunicación</h2></div>
-      <div class="grid2">
-        <div class="card"><div class="chart-box small"><canvas id="chartRedesMedios"></canvas></div></div>
-        <div class="card">
-          <div class="alert-item">
-            <span class="ico">!</span>
-            <span class="txt"><span class="src">Cobertura incompleta de redes sociales.</span> El archivo analizado contiene únicamente registros de medios digitales locales (La Hora, Primera Zona, Diario El Norte, Expectativa, OMCE Medios). No incluye publicaciones verificables de las cuentas sociales mencionadas en la solicitud original (poribarratodo, juanariasec, ibarraconjuanarias). Cualquier comparación entre "conversación en redes" y "cobertura mediática" queda, por ahora, sin base de datos para el lado social — no se completa con estimaciones.</span>
+    <!-- 15. METODOLOGÍA Y LIMITACIONES -->
+    <section id="sec-metodologia" class="section">
+      <div class="sec-head"><span class="sec-num">15</span><h2>Metodología y limitaciones</h2></div>
+      <div class="card">
+        <h3 style="margin-top: 0;">Nota metodológica</h3>
+        <p>Este sistema analiza <strong>conversación digital pública y cobertura mediática ya publicada</strong>, a partir de un conjunto de registros verificables. Enfoque académico. No constituye asesoría electoral ni recomendación de voto.</p>
+        <h4>Principios de integridad de datos:</h4>
+        <ul>
+          <li>✓ No inventar publicaciones</li>
+          <li>✓ No inventar interacciones</li>
+          <li>✓ Conservar siempre fuente y URL</li>
+          <li>✓ Indicar datos faltantes explícitamente</li>
+          <li>✓ Diferenciar hecho, opinión y afirmación</li>
+          <li>✓ No confundir cobertura con intención de voto</li>
+        </ul>
+        <h4>Limitaciones actuales:</h4>
+        <div class="limits-grid" id="limits-grid"></div>
+      </div>
+    </section>
+
+    <!-- 16. CONFIGURACIÓN VISUAL -->
+    <section id="sec-config-visual" class="section">
+      <div class="sec-head"><span class="sec-num">16</span><h2>Configuración de identidad visual</h2></div>
+      <div class="card">
+        <p>Personaliza los colores y estilos de la aplicación para alinearse con la identidad de @poribarratodo.</p>
+        <div class="grid2">
+          <div class="field">
+            <label>Color primario</label>
+            <input type="color" id="color-primary" value="#2F7A72">
+          </div>
+          <div class="field">
+            <label>Color secundario</label>
+            <input type="color" id="color-secondary" value="#4C6B8A">
+          </div>
+          <div class="field">
+            <label>Color de acento</label>
+            <input type="color" id="color-accent" value="#C97A2E">
+          </div>
+          <div class="field">
+            <label>Color de fondo</label>
+            <input type="color" id="color-background" value="#EEEFE7">
+          </div>
+          <div class="field">
+            <label>Color de texto</label>
+            <input type="color" id="color-text" value="#1B2630">
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- 8. Mapa de narrativas -->
-    <section id="sec8">
-      <div class="sec-head"><span class="sec-num">08</span><h2>Mapa de narrativas</h2></div>
-      <div class="sec-note">Agrupación temática de los registros alrededor de tres frentes narrativos identificados en el corpus. El tamaño de cada nodo es proporcional al número de registros; no representa intensidad de opinión.</div>
-      <div class="card">
-        <div class="narrative-wrap">
-          <svg width="640" height="360" viewBox="0 0 640 360" style="max-width:100%;height:auto;">
-            <line x1="320" y1="180" x2="180" y2="90" stroke="#C6C9BC" stroke-width="1.5"/>
-            <line x1="320" y1="180" x2="470" y2="90" stroke="#C6C9BC" stroke-width="1.5"/>
-            <line x1="320" y1="180" x2="470" y2="270" stroke="#C6C9BC" stroke-width="1.5"/>
-            <line x1="320" y1="180" x2="150" y2="270" stroke="#C6C9BC" stroke-width="1.5"/>
-            <circle cx="320" cy="180" r="46" fill="#132029"/>
-            <text x="320" y="176" text-anchor="middle" fill="#fff" font-family="Space Grotesk" font-size="12" font-weight="700">Juan Arias</text>
-            <text x="320" y="192" text-anchor="middle" fill="#8FCFC2" font-family="IBM Plex Mono" font-size="9">precandidatura</text>
-
-            <circle cx="180" cy="90" r="40" fill="#2F7A72"/>
-            <text x="180" y="86" text-anchor="middle" fill="#fff" font-family="Space Grotesk" font-size="11" font-weight="700">7</text>
-            <text x="180" y="99" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono" font-size="8">registros</text>
-            <text x="180" y="142" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">Proceso electoral /</text>
-            <text x="180" y="154" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">candidatura</text>
-
-            <circle cx="470" cy="90" r="34" fill="#4C6B8A"/>
-            <text x="470" y="86" text-anchor="middle" fill="#fff" font-family="Space Grotesk" font-size="11" font-weight="700">4</text>
-            <text x="470" y="99" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono" font-size="8">registros</text>
-            <text x="470" y="140" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">Propuestas de</text>
-            <text x="470" y="152" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">campaña</text>
-
-            <circle cx="470" cy="270" r="30" fill="#C97A2E"/>
-            <text x="470" y="266" text-anchor="middle" fill="#fff" font-family="Space Grotesk" font-size="11" font-weight="700">3</text>
-            <text x="470" y="279" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono" font-size="8">registros</text>
-            <text x="470" y="316" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">Contexto local</text>
-            <text x="470" y="328" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">(no vinculado directo)</text>
-
-            <circle cx="150" cy="270" r="26" fill="#8A9198"/>
-            <text x="150" y="266" text-anchor="middle" fill="#fff" font-family="Space Grotesk" font-size="11" font-weight="700">1</text>
-            <text x="150" y="279" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono" font-size="8">registro</text>
-            <text x="150" y="312" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">Participación</text>
-            <text x="150" y="324" text-anchor="middle" fill="#1B2630" font-family="IBM Plex Mono" font-size="10">ciudadana</text>
-          </svg>
-        </div>
-        <ul class="clean" style="margin-top:14px;font-size:.87rem;">
-          <li><b>Proceso electoral / candidatura</b> (7 registros): anuncio de precandidatura, primarias internas, ratificación por el movimiento Juntos 70, panorama y calendario electoral, y una encuesta de un tercero (CONSULTAREC) citada por un medio.</li>
-          <li><b>Propuestas de campaña</b> (4 registros): todos provienen de una misma entrevista publicada el 25-07-2026 en La Hora, que aborda mercado Amazonas, agua potable, movilidad e infraestructura/empleo joven.</li>
-          <li><b>Contexto local no vinculado directamente</b> (3 registros): notas sobre seguridad/espacio público, ambiente (Guayabillas) y desarrollo urbano/cultura (Centro El Torreón), incluidas como contexto de la conversación pública de Ibarra, sin mención directa al precandidato.</li>
-          <li><b>Participación ciudadana</b> (1 registro): mención a la intención declarada de construir la propuesta mediante diálogo con habitantes.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 9. Preguntas ciudadanas -->
-    <section id="sec9">
-      <div class="sec-head"><span class="sec-num">09</span><h2>Preguntas o preocupaciones ciudadanas frecuentes</h2></div>
-      <div class="empty-state">
-        No se identificaron preguntas, comentarios ciudadanos o reacciones textuales en el conjunto de datos proporcionado: los 15 registros corresponden a piezas de medios digitales (notas y entrevistas), no a interacciones de usuarios en redes sociales. Para poblar esta sección de forma confiable se requiere incorporar datos de conversación ciudadana (comentarios, menciones, respuestas) con fuente y fecha verificables.
-      </div>
-    </section>
-
-    <!-- 10. Noticias relevantes -->
-    <section id="sec10">
-      <div class="sec-head"><span class="sec-num">10</span><h2>Noticias relevantes</h2></div>
-      <div class="sec-note">Cada tarjeta conserva su fuente y enlace original. Usa los filtros del panel lateral para acotar por fuente, categoría, tipo o fecha.</div>
-      <div class="news-list" id="news-list"></div>
-    </section>
-
-    <!-- 11. Alertas de verificación -->
-    <section id="sec11">
-      <div class="sec-head"><span class="sec-num">11</span><h2>Alertas sobre información que requiere verificación</h2></div>
-      <div id="alerts-list"></div>
-    </section>
-
-    <!-- 12. Limitaciones -->
-    <section id="sec12">
-      <div class="sec-head"><span class="sec-num">12</span><h2>Limitaciones de los datos</h2></div>
-      <div class="limits-grid">
-        <div class="limit-card"><b>Tamaño de muestra reducido</b>15 registros en una ventana de aproximadamente 60 días: insuficiente para conclusiones estadísticas generalizables.</div>
-        <div class="limit-card"><b>Sin datos de redes sociales</b>No se localizaron publicaciones verificables de las cuentas sociales solicitadas (poribarratodo, juanariasec, ibarraconjuanarias) en el archivo de origen.</div>
-        <div class="limit-card"><b>Tono no inferido</b>El 100% de los registros carece de clasificación de sentimiento en el dato de origen; no se generó una inferencia automática.</div>
-        <div class="limit-card"><b>Fuente concentrada</b>4 de los 15 registros de "propuestas de campaña" provienen de una sola entrevista (La Hora, 25-07-2026), no de piezas independientes.</div>
-        <div class="limit-card"><b>Dato de encuesta de tercero</b>La cifra de intención de voto citada proviene de una encuesta atribuida a CONSULTAREC y reportada por un medio; no es una medición propia de este sistema ni fue verificada de forma independiente.</div>
-        <div class="limit-card"><b>Sin conversación ciudadana</b>No hay comentarios, preguntas o reacciones de usuarios en el dataset, por lo que la sección de "preguntas frecuentes" y la comparación con propuestas comunicadas quedan incompletas.</div>
+        <button class="btn-primary" id="save-colors" style="margin-top: 16px;">Guardar configuración visual</button>
       </div>
     </section>
 
@@ -448,200 +1177,11 @@
 </div>
 
 <footer>
-  IBARRA CIVIC RADAR — herramienta de monitoreo de cobertura mediática y conversación pública con fines analíticos y académicos. No constituye asesoría de campaña ni recomendación de voto. Fuentes citadas dentro de cada registro.
+  PORIBARRATODO — Monitor de conversación pública local y cobertura mediática. Herramienta de análisis con fines académicos e inteligencia competitiva. No constituye asesoría electoral.
+  <br>
+  Última actualización: <span id="footer-timestamp">—</span>
 </footer>
 
-<script>
-const RAW = [
-{fecha:"2026-06-22",fuente:"La Hora",tipo:"Preparación de primarias",tema:"Preparación electoral",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Juntos 70",url:"https://www.lahora.com.ec/imbaburacarchi/imbabura-juntos-lista-70-elegira-a-sus-precandidatos-para-las-seccionales-2027-20260622-0012.html",resumen:"Juan Arias aparece como posible precandidato de Juntos 70 para Ibarra; el movimiento convocó a sus primarias del 28 de junio.",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"La Hora",tipo:"Ratificación de precandidatura",tema:"Candidatura",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Juntos 70",url:"https://www.lahora.com.ec/imbaburacarchi/juntos-70-oficializa-a-juan-arias-como-precandidato-a-la-alcaldia-de-ibarra-20260629-0021.html",resumen:"Juan Fernando Arias fue elegido como precandidato de Juntos lista 70; participaron más de 300 militantes y dirigentes según la publicación.",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"Primera Zona",tipo:"Ratificación de precandidatura",tema:"Candidatura",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Juntos 70",url:"https://primerazona.news/2026/06/juan-arias-ratificado-como-precandidato-a-la-alcaldia-de-ibarra-por-el-movimiento-juntos/",resumen:"El movimiento Juntos ratificó a Juan Arias como precandidato a la Alcaldía de Ibarra tras las primarias del 28 de junio.",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"Diario El Norte",tipo:"Ratificación de precandidatura",tema:"Participación ciudadana",categoria:"Participación ciudadana",emergente:false,entidad:"Juntos 70",url:"https://elnorte.ec/juan-arias-es-ratificado-como-precandidato-a-la-alcaldia-de-ibarra/",resumen:"Se reportó la ratificación de Arias y su intención de construir una propuesta mediante diálogo con habitantes del cantón.",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"Expectativa",tipo:"Ratificación de precandidatura",tema:"Equipo político",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Juntos 70",url:"https://www.expectativa.ec/juan-arias-fue-ratificado-como-precandidato-a-la-alcaldia-de-ibarra/",resumen:"Se informó sobre la designación de Juan Arias y la presentación de precandidaturas a concejales.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-01",fuente:"OMCE Medios",tipo:"Panorama electoral",tema:"Panorama electoral",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Ibarra",url:"https://omcemedios.com/omce/2026/07/01/mirador-politico-3/",resumen:"El medio incluyó a Juan Fernando Arias entre las precandidaturas para la Alcaldía de Ibarra y describió el proceso electoral en Imbabura.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-08",fuente:"Primera Zona",tipo:"Escenario electoral",tema:"Encuestas",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Ibarra",url:"https://primerazona.news/2026/07/se-mantiene-una-eleccion-abierta-y-jose-moncayo-aparece-como-el-outsider-de-la-contienda/",resumen:"Una medición atribuida a CONSULTAREC reportó 15% para Juan Arias, junto con 39% de indecisos. El dato corresponde a la encuesta citada por el medio y no equivale a una medición propia.",verificacion:"Requiere verificación — dato de encuesta de tercero (CONSULTAREC), no medición propia"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo:"Propuestas de campaña",tema:"Comercio / mercado Amazonas",categoria:"Mercado Amazonas",emergente:false,entidad:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",resumen:"Entrevista sobre modernización del mercado Amazonas, con una proyección de inversión de USD 40 millones.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo:"Propuestas de campaña",tema:"Agua potable",categoria:"Agua potable",emergente:false,entidad:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",resumen:"La entrevista aborda agua potable, mantenimiento y ampliación de pozos, y un plan maestro de agua y alcantarillado.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo:"Propuestas de campaña",tema:"Movilidad",categoria:"Movilidad y transporte",emergente:false,entidad:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",resumen:"La entrevista plantea modernización del transporte público y menciona el tren como parte de la movilidad de Ibarra.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo:"Propuestas de campaña",tema:"Infraestructura / empleo joven",categoria:"Infraestructura",emergente:false,entidad:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",resumen:"Entre tres prioridades se mencionan mercado Amazonas, puente del ingreso norte y vinculación con la academia para generar empleo joven.",verificacion:"Revisar fuente original"},
-{fecha:"2026-08-01",fuente:"OMCE Medios",tipo:"Calendario electoral",tema:"Calendario electoral",categoria:"Proceso electoral / candidatura",emergente:true,entidad:"Elecciones seccionales",url:"https://omcemedios.com/omce/2026/07/01/mirador-politico-3/",resumen:"Se reportó la convocatoria oficial a elecciones el 1 de agosto y etapas posteriores del proceso electoral; el artículo lista a Arias entre las precandidaturas de Ibarra.",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-23",fuente:"La Hora",tipo:"Contexto local",tema:"Seguridad / espacio público",categoria:"Seguridad",emergente:false,entidad:"Contexto de Ibarra",url:"https://www.lahora.com.ec/imbaburacarchi/",resumen:"Una noticia sobre violencia y ocupación de espacios públicos en Ibarra aporta contexto para el análisis de temas locales, aunque no se refiere directamente a Arias.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-03",fuente:"La Hora",tipo:"Contexto local",tema:"Ambiente",categoria:"Ambiente",emergente:false,entidad:"Contexto de Ibarra",url:"https://www.lahora.com.ec/tema/ibarra-t49650",resumen:"Noticias sobre áreas verdes y protección de Guayabillas aportan contexto ambiental para el monitoreo de conversación pública en Ibarra.",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-17",fuente:"La Hora",tipo:"Contexto local",tema:"Desarrollo urbano / cultura",categoria:"Desarrollo urbano y cultura",emergente:true,entidad:"Contexto de Ibarra",url:"https://www.lahora.com.ec/tema/ibarra-t49650",resumen:"La inauguración del Centro Cultural y Comercial El Torreón aparece entre las noticias locales de Ibarra del periodo.",verificacion:"Revisar fuente original"},
-];
-
-let state = {fuente:"",categoria:"",tipo:"",desde:"",hasta:""};
-
-function uniq(arr){return [...new Set(arr)];}
-function fillSelect(id, values){
-  const sel = document.getElementById(id);
-  values.sort().forEach(v=>{
-    const o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o);
-  });
-}
-fillSelect('f-fuente', uniq(RAW.map(r=>r.fuente)));
-fillSelect('f-categoria', uniq(RAW.map(r=>r.categoria)));
-fillSelect('f-tipo', uniq(RAW.map(r=>r.tipo)));
-
-['f-fuente','f-categoria','f-tipo','f-desde','f-hasta'].forEach(id=>{
-  document.getElementById(id).addEventListener('change', ()=>{
-    state.fuente = document.getElementById('f-fuente').value;
-    state.categoria = document.getElementById('f-categoria').value;
-    state.tipo = document.getElementById('f-tipo').value;
-    state.desde = document.getElementById('f-desde').value;
-    state.hasta = document.getElementById('f-hasta').value;
-    render();
-  });
-});
-document.getElementById('reset').addEventListener('click', ()=>{
-  state = {fuente:"",categoria:"",tipo:"",desde:"",hasta:""};
-  ['f-fuente','f-categoria','f-tipo','f-desde','f-hasta'].forEach(id=>document.getElementById(id).value="");
-  render();
-});
-
-function getFiltered(){
-  return RAW.filter(r=>{
-    if(state.fuente && r.fuente!==state.fuente) return false;
-    if(state.categoria && r.categoria!==state.categoria) return false;
-    if(state.tipo && r.tipo!==state.tipo) return false;
-    if(state.desde && r.fecha < state.desde) return false;
-    if(state.hasta && r.fecha > state.hasta) return false;
-    return true;
-  }).sort((a,b)=>a.fecha.localeCompare(b.fecha));
-}
-
-let charts = {};
-function destroyChart(k){ if(charts[k]){ charts[k].destroy(); delete charts[k]; } }
-
-const COLORS = ['#2F7A72','#4C6B8A','#C97A2E','#8A9198','#6E9E90','#7A93AE','#B98E5E','#5B6670'];
-
-function render(){
-  const data = getFiltered();
-  document.getElementById('count-visible').textContent = data.length;
-
-  // KPIs
-  const fuentes = uniq(data.map(d=>d.fuente));
-  const categorias = uniq(data.map(d=>d.categoria));
-  const fechas = data.map(d=>d.fecha).sort();
-  const reqVerif = data.filter(d=>d.verificacion && d.verificacion.length>0).length;
-  const kpiRow = document.getElementById('kpi-row');
-  kpiRow.innerHTML = `
-    <div class="kpi"><div class="v">${data.length}</div><div class="l">Registros</div></div>
-    <div class="kpi"><div class="v">${fuentes.length}</div><div class="l">Fuentes distintas</div></div>
-    <div class="kpi"><div class="v">${categorias.length}</div><div class="l">Categorías temáticas</div></div>
-    <div class="kpi"><div class="v">${fechas.length?fechas[0].slice(5):'—'} → ${fechas.length?fechas[fechas.length-1].slice(5):'—'}</div><div class="l">Rango (mm-dd)</div></div>
-    <div class="kpi alert"><div class="v">${data.length? Math.round(100*reqVerif/data.length):0}%</div><div class="l">Marcados a verificar</div></div>
-    <div class="kpi alert"><div class="v">0</div><div class="l">Registros de redes sociales</div></div>
-  `;
-
-  // Resumen
-  const catCounts = {};
-  data.forEach(d=>catCounts[d.categoria]=(catCounts[d.categoria]||0)+1);
-  const topCat = Object.entries(catCounts).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('resumen-texto').innerHTML =
-    `Dentro del conjunto filtrado (<b>${data.length}</b> registros, ${fuentes.length} fuentes), la categoría con mayor presencia es <b>${topCat?topCat[0]:'—'}</b> (${topCat?topCat[1]:0} registros). Todos los registros provienen de medios digitales locales; no hay evidencia en el archivo de publicaciones propias en redes sociales de las cuentas señaladas en la solicitud original.`;
-  const bullets = [];
-  const propuestas = data.filter(d=>d.tipo==="Propuestas de campaña");
-  if(propuestas.length) bullets.push(`${propuestas.length} registro(s) documentan propuestas explícitas atribuidas a Juan Arias, concentrados en una entrevista del 25-07-2026 (La Hora).`);
-  const encuesta = data.find(d=>d.tema==="Encuestas");
-  if(encuesta) bullets.push(`Se identificó una cifra de intención de voto (encuesta CONSULTAREC citada por Primera Zona) que requiere verificación independiente antes de reportarse como dato consolidado.`);
-  const contexto = data.filter(d=>d.tipo==="Contexto local").length;
-  if(contexto) bullets.push(`${contexto} registro(s) corresponden a contexto local de Ibarra sin mención directa al precandidato (seguridad, ambiente, desarrollo urbano).`);
-  bullets.push(`No se registran preguntas o comentarios ciudadanos ni publicaciones en redes sociales en el archivo analizado (ver secciones 7 y 9).`);
-  document.getElementById('resumen-bullets').innerHTML = bullets.map(b=>`<li>${b}</li>`).join('');
-
-  // Volumen por fecha
-  const byDate = {};
-  data.forEach(d=>byDate[d.fecha]=(byDate[d.fecha]||0)+1);
-  const dateLabels = Object.keys(byDate).sort();
-  destroyChart('volumen');
-  charts.volumen = new Chart(document.getElementById('chartVolumen'), {
-    type:'bar',
-    data:{labels:dateLabels, datasets:[{label:'Registros', data:dateLabels.map(l=>byDate[l]), backgroundColor:'#2F7A72', borderRadius:4}]},
-    options:{plugins:{legend:{display:false}, title:{display:true,text:'Volumen de publicaciones por fecha'}}, scales:{y:{beginAtZero:true, ticks:{stepSize:1}}}}
-  });
-
-  // Ranking temas (categoria)
-  const catEntries = Object.entries(catCounts).sort((a,b)=>b[1]-a[1]);
-  destroyChart('ranking');
-  charts.ranking = new Chart(document.getElementById('chartRanking'), {
-    type:'bar',
-    data:{labels:catEntries.map(e=>e[0]), datasets:[{label:'Registros', data:catEntries.map(e=>e[1]), backgroundColor:catEntries.map((_,i)=>COLORS[i%COLORS.length]), borderRadius:4}]},
-    options:{indexAxis:'y', plugins:{legend:{display:false}, title:{display:true,text:'Ranking de categorías temáticas'}}, scales:{x:{beginAtZero:true,ticks:{stepSize:1}}}}
-  });
-
-  // Evolución semanal por categoría
-  function weekOf(dateStr){
-    const d = new Date(dateStr+"T00:00:00");
-    const first = new Date("2026-06-22T00:00:00");
-    const diffDays = Math.floor((d-first)/86400000);
-    const wk = Math.floor(diffDays/7);
-    return "Sem "+(wk+1);
-  }
-  const weeks = uniq(data.map(d=>weekOf(d.fecha))).sort((a,b)=>parseInt(a.split(' ')[1])-parseInt(b.split(' ')[1]));
-  const cats = uniq(data.map(d=>d.categoria));
-  const evoDatasets = cats.map((c,i)=>({
-    label:c,
-    data: weeks.map(w=> data.filter(d=>weekOf(d.fecha)===w && d.categoria===c).length),
-    backgroundColor: COLORS[i%COLORS.length]
-  }));
-  destroyChart('evolucion');
-  charts.evolucion = new Chart(document.getElementById('chartEvolucion'), {
-    type:'bar',
-    data:{labels:weeks, datasets:evoDatasets},
-    options:{plugins:{title:{display:true,text:'Registros por semana y categoría'}}, responsive:true, scales:{x:{stacked:true}, y:{stacked:true, beginAtZero:true, ticks:{stepSize:1}}}}
-  });
-
-  // Tono
-  destroyChart('tono');
-  charts.tono = new Chart(document.getElementById('chartTono'), {
-    type:'doughnut',
-    data:{labels:['No inferido (dato no disponible)'], datasets:[{data:[data.length||1], backgroundColor:['#8A9198']}]},
-    options:{plugins:{title:{display:true,text:'Tono reportado en el dato de origen'}}}
-  });
-
-  // Redes vs medios
-  destroyChart('redesmedios');
-  charts.redesmedios = new Chart(document.getElementById('chartRedesMedios'), {
-    type:'bar',
-    data:{labels:['Medios digitales locales','Redes sociales (cuentas solicitadas)'], datasets:[{data:[data.length,0], backgroundColor:['#4C6B8A','#C97A2E'], borderRadius:4}]},
-    options:{plugins:{legend:{display:false}, title:{display:true,text:'Registros por tipo de fuente'}}, scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}
-  });
-
-  // Timeline
-  document.getElementById('timeline').innerHTML = data.map(d=>`
-    <div class="tl-item">
-      <div class="tl-date">${d.fecha}</div>
-      <div class="tl-title">${d.tipo}${d.verificacion && d.verificacion.startsWith('Requiere')? '<span class="badge-verify">Requiere verificación</span>':''}</div>
-      <div>${d.resumen}</div>
-      <div class="tl-source">${d.fuente} · ${d.categoria}${d.emergente?' (categoría emergente)':''}</div>
-    </div>
-  `).join('') || '<div class="empty-state">No hay registros en el rango filtrado.</div>';
-
-  // News
-  document.getElementById('news-list').innerHTML = data.map(d=>`
-    <div class="news-card">
-      <div class="date">${d.fecha}</div>
-      <div>
-        <span class="tag">${d.categoria}</span>
-        <div class="src">${d.fuente} — ${d.tipo}</div>
-        <p>${d.resumen}</p>
-      </div>
-      <a class="link" href="${d.url}" target="_blank" rel="noopener">Ver fuente →</a>
-    </div>
-  `).join('') || '<div class="empty-state">No hay registros en el rango filtrado.</div>';
-
-  // Alerts
-  const toVerify = data.filter(d=>d.verificacion && d.verificacion.length>0);
-  document.getElementById('alerts-list').innerHTML = (toVerify.length ? toVerify.map(d=>`
-    <div class="alert-item">
-      <span class="ico">!</span>
-      <span class="txt"><span class="src">${d.fecha} · ${d.fuente}</span> — ${d.verificacion}. <a href="${d.url}" target="_blank" rel="noopener">Enlace original</a>.</span>
-    </div>
-  `).join('') : '<div class="empty-state">No hay registros marcados para verificación en el rango filtrado.</div>');
-}
-
-render();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
