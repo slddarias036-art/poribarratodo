@@ -1,4 +1,9 @@
 // ============================================================
+// APP.JS - APLICACIÓN PRINCIPAL SIMPLIFICADA
+// Usa función unificada csv-loader y coordina módulos
+// ============================================================
+
+// ============================================================
 // DATOS SEMILLA INICIALES (PRELIMINARES)
 // ============================================================
 const SEED_ROWS = [
@@ -44,13 +49,6 @@ const SEED_ROWS = [
   }
 ];
 
-// ============================================================
-// CONFIGURACIÓN DE URLS Y RECURSOS
-// ============================================================
-const DRIVE_FILE_ID = "1NmSWUIDu0DaxIWxADq3-Q3P2lss3HvlD";
-const DIRECT_DRIVE_URL = `https://drive.google.com/uc?export=download&id=${DRIVE_FILE_ID}`;
-const PROXY_DRIVE_URL = `https://api.corsproxy.io/?${encodeURIComponent(DIRECT_DRIVE_URL)}`;
-
 const STORAGE_KEYS = {
   DATASET: 'ibarra_radar_cached_dataset',
   LAST_UPDATE: 'ibarra_radar_last_update_info'
@@ -62,7 +60,7 @@ let DATA = [];
 // NAVEGACIÓN Y CONTROL DE PESTAÑAS (TABS)
 // ============================================================
 function setupTabNavigation() {
-  const tabButtons = document.querySelectorAll('.nav-tab-btn, [data-tab]');
+  const tabButtons = document.querySelectorAll('.nav-tab-btn, [data-tab], .tab');
   const tabPanels = document.querySelectorAll('.tab-panel, [data-panel]');
 
   if (!tabButtons.length) return;
@@ -91,129 +89,6 @@ function setupTabNavigation() {
       });
     });
   });
-}
-
-// ============================================================
-// PROCESAMIENTO Y MODELADO DE DATOS
-// ============================================================
-function buildDataset(parsedRows) {
-  return parsedRows.map((row, idx) => ({
-    id: idx + 1,
-    fecha: row.fecha || '',
-    fuente: row.fuente || '',
-    plataforma: row.plataforma || 'Medios digitales',
-    tipo_contenido: row.tipo_contenido || 'Artículo',
-    contenido_resumido: row.contenido_resumido || '',
-    tema: row.tema || '',
-    entidad_o_contexto: row.entidad_o_contexto || '',
-    url: row.url || '#',
-    sentimiento: row.sentimiento || 'No inferido',
-    verificacion: row.verificacion || 'Sin verificar',
-    nota_metodologica: row.nota_metodologica || '',
-    interacciones: parseInt(row.interacciones, 10) || 0,
-    comentarios: parseInt(row.comentarios, 10) || 0,
-    compartidos: parseInt(row.compartidos, 10) || 0,
-    visualizaciones: parseInt(row.visualizaciones, 10) || 0,
-    guardados: parseInt(row.guardados, 10) || 0,
-    ubicacion: row.ubicacion || 'Sin especificar',
-    circunscripcion: row.circunscripcion || 'Sin especificar',
-    edad: row.edad ? parseInt(row.edad, 10) : null,
-    hashtags: typeof row.hashtags === 'string' ? row.hashtags.split(';').map(h => h.trim()) : (row.hashtags || []),
-    audio: row.audio || ''
-  }));
-}
-
-function processCsvContent(csvText, sourceLabel) {
-  if (typeof Papa === 'undefined') {
-    alert('Error: La librería PapaParse no está cargada en el proyecto.');
-    return;
-  }
-
-  Papa.parse(csvText, {
-    header: true,
-    skipEmptyLines: true,
-    complete: function(results) {
-      if (results.data && results.data.length > 0) {
-        DATA = buildDataset(results.data);
-        localStorage.setItem(STORAGE_KEYS.DATASET, JSON.stringify(DATA));
-        localStorage.setItem(STORAGE_KEYS.LAST_UPDATE, JSON.stringify({
-          timestamp: new Date().toISOString(),
-          source: sourceLabel
-        }));
-        renderAll();
-        updateStatusIndicator(`${sourceLabel} (${DATA.length} registros)`);
-      } else {
-        alert('El archivo CSV no contiene registros válidos.');
-      }
-    },
-    error: function(err) {
-      alert('Error en el formato del CSV: ' + err.message);
-    }
-  });
-}
-
-// ============================================================
-// SINCRONIZACIÓN Y DESCARGA REMOTA
-// ============================================================
-async function syncOnlineCsv() {
-  const btn = document.getElementById('btnSyncOnline');
-  if (btn) {
-    btn.innerHTML = '⌛ Sincronizando...';
-    btn.disabled = true;
-  }
-
-  let csvText = null;
-
-  try {
-    const proxyResponse = await fetch(`${PROXY_DRIVE_URL}&_t=${Date.now()}`);
-    if (proxyResponse.ok) {
-      const text = await proxyResponse.text();
-      if (!text.trim().startsWith("<html") && !text.trim().startsWith("<!DOCTYPE")) {
-        csvText = text;
-      }
-    }
-
-    if (!csvText) {
-      const directResponse = await fetch(`${DIRECT_DRIVE_URL}&_t=${Date.now()}`);
-      if (directResponse.ok) {
-        const text = await directResponse.text();
-        if (!text.trim().startsWith("<html") && !text.trim().startsWith("<!DOCTYPE")) {
-          csvText = text;
-        }
-      }
-    }
-
-    if (csvText) {
-      processCsvContent(csvText, "Google Drive (Actualizado)");
-    } else {
-      throw new Error("Respuesta no válida recibida desde Google Drive.");
-    }
-
-  } catch (error) {
-    console.warn("Falla en la carga remota, utilizando datos cacheados o iniciales:", error);
-    if (!DATA || DATA.length === 0) {
-      DATA = buildDataset(SEED_ROWS);
-      renderAll();
-      updateStatusIndicator("Datos semillas locales (offline)");
-    }
-    alert("No se pudo descargar automáticamente el archivo desde Google Drive. Se han cargado los datos iniciales.");
-  } finally {
-    if (btn) {
-      btn.innerHTML = '🔄 Sincronizar CSV';
-      btn.disabled = false;
-    }
-  }
-}
-
-function handleFileUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    processCsvContent(e.target.result, `Archivo local (${file.name})`);
-  };
-  reader.readAsText(file);
 }
 
 // ============================================================
@@ -264,48 +139,196 @@ function updateStatusIndicator(msg) {
 }
 
 // ============================================================
+// MANEJADOR DE CARGA LOCAL (FILE INPUT)
+// ============================================================
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  console.log('📂 Cargando archivo local:', file.name);
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const csvText = e.target.result;
+    
+    // Usar función global unificada para parsear
+    if (typeof Papa === 'undefined') {
+      alert('Error: PapaParse no está cargado');
+      return;
+    }
+
+    Papa.parse(csvText, {
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        if (results.data && results.data.length > 0) {
+          // Disparar evento csv-updated para que csv-loader lo procese
+          document.dispatchEvent(new CustomEvent('csv-updated', {
+            detail: results.data,
+            bubbles: true
+          }));
+          updateStatusIndicator(`Archivo local (${file.name}) - ${results.data.length} registros`);
+        } else {
+          alert('El archivo CSV no contiene registros válidos.');
+        }
+      },
+      error: function(err) {
+        alert('Error en el formato del CSV: ' + err.message);
+      }
+    });
+  };
+  reader.readAsText(file);
+}
+
+// ============================================================
+// BOTÓN DE SINCRONIZACIÓN (USA FUNCIÓN GLOBAL UNIFICADA)
+// ============================================================
+async function syncOnlineCsv() {
+  const btn = document.getElementById('btnSyncOnline');
+  if (btn) {
+    btn.innerHTML = '⌛ Sincronizando...';
+    btn.disabled = true;
+  }
+
+  try {
+    // Llamar a la función global unificada desde csv-loader.js
+    if (typeof fetchAndLoadCSV === 'function') {
+      await fetchAndLoadCSV();
+      console.log('✅ Sincronización completada con fetchAndLoadCSV');
+    } else {
+      throw new Error('fetchAndLoadCSV no disponible');
+    }
+  } catch (error) {
+    console.warn('Error en sincronización:', error);
+    
+    // Fallback a datos semilla
+    if (!DATA || DATA.length === 0) {
+      DATA = SEED_ROWS;
+      renderAll();
+      updateStatusIndicator("Datos semillas locales (offline)");
+      document.dispatchEvent(new CustomEvent('csv-updated', {
+        detail: SEED_ROWS,
+        bubbles: true
+      }));
+    }
+  } finally {
+    if (btn) {
+      btn.innerHTML = '🔄 Sincronizar CSV';
+      btn.disabled = false;
+    }
+  }
+}
+
+// ============================================================
+// EVENT LISTENERS - COORDINACIÓN DE MÓDULOS
+// ============================================================
+
+// 1. Cuando csv-updated es disparado (por csv-loader), actualizar datos
+document.addEventListener('csv-updated', function(ev) {
+  try {
+    const rows = ev.detail || [];
+    if (Array.isArray(rows) && rows.length) {
+      DATA = rows;
+      
+      // Guardar en caché
+      try {
+        localStorage.setItem(STORAGE_KEYS.DATASET, JSON.stringify(DATA));
+        localStorage.setItem(STORAGE_KEYS.LAST_UPDATE, JSON.stringify({
+          timestamp: new Date().toISOString(),
+          count: DATA.length
+        }));
+      } catch (e) {
+        console.warn('No se pudo guardar en caché', e);
+      }
+
+      // Renderizar
+      renderAll();
+      
+      // Actualizar UI
+      const last = document.getElementById('lastUpdate');
+      if (last) last.textContent = 'Última actualización: ' + (new Date()).toLocaleString();
+      
+      console.log('📊 Datos actualizados:', DATA.length, 'registros');
+    }
+  } catch (e) {
+    console.warn('Error en csv-updated handler:', e);
+  }
+});
+
+// 2. Cuando data-enriched es disparado (por analytics-radar)
+document.addEventListener('data-enriched', function(ev) {
+  try {
+    console.log('🎨 Datos enriquecidos recibidos, esperando simulaciones...');
+  } catch (e) {
+    console.warn('Error en data-enriched handler:', e);
+  }
+});
+
+// 3. Cuando simulations-ready es disparado (por simulator-predictive)
+document.addEventListener('simulations-ready', function(ev) {
+  try {
+    console.log('✨ Simulaciones predictivas disponibles - Renderizando dashboards enriquecidos');
+  } catch (e) {
+    console.warn('Error en simulations-ready handler:', e);
+  }
+});
+
+// ============================================================
 // INICIALIZACIÓN GENERAL
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 Inicializando Ibarra Civic Radar...');
+  
   setupTabNavigation();
 
-  // Soportar ambos IDs por compatibilidad: 'csvInput' (nuevo) y 'inputCsvFile' (antiguo)
+  // Hook para input de carga local
   const fileInput = document.getElementById('csvInput') || document.getElementById('inputCsvFile');
-  if (fileInput) fileInput.addEventListener('change', handleFileUpload);
+  if (fileInput) {
+    fileInput.addEventListener('change', handleFileUpload);
+  }
 
+  // Hook para botón de sincronización
   const btnSync = document.getElementById('btnSyncOnline');
-  if (btnSync) btnSync.addEventListener('click', syncOnlineCsv);
+  if (btnSync) {
+    btnSync.addEventListener('click', syncOnlineCsv);
+  }
 
-  // Escuchar evento global cuando csv-hooks/data-loader despacha la actualización
-  document.addEventListener('csv-updated', function(ev){
-    try{
-      const rows = ev.detail || [];
-      if(Array.isArray(rows) && rows.length){
-        DATA = buildDataset(rows);
-        renderAll();
-        const last = document.getElementById('lastUpdate');
-        if(last) last.textContent = 'Última actualización: ' + (new Date()).toLocaleString();
-      }
-    }catch(e){
-      console.warn('csv-updated handler error', e);
-    }
-  });
-
+  // Intentar cargar desde caché
   const cachedData = localStorage.getItem(STORAGE_KEYS.DATASET);
   if (cachedData) {
     try {
-      DATA = JSON.parse(cachedData);
-      renderAll();
-      updateStatusIndicator("Caché local cargada");
-      return;
+      const parsedData = JSON.parse(cachedData);
+      if (Array.isArray(parsedData) && parsedData.length) {
+        DATA = parsedData;
+        renderAll();
+        updateStatusIndicator("Caché local cargada");
+        
+        // Disparar evento para que módulos procesen datos cacheados
+        document.dispatchEvent(new CustomEvent('csv-updated', {
+          detail: DATA,
+          bubbles: true
+        }));
+        
+        console.log('💾 Datos cargados desde caché');
+        return;
+      }
     } catch (e) {
       console.error("Error leyendo caché:", e);
     }
   }
 
-  // Si no hay datos cacheados, usar datos de semilla e intentar sincronizar
-  DATA = buildDataset(SEED_ROWS);
+  // Si no hay caché, usar semilla e intentar sincronizar
+  DATA = SEED_ROWS;
   renderAll();
   updateStatusIndicator("Cargando datos...");
+  
+  // Disparar evento de semilla
+  document.dispatchEvent(new CustomEvent('csv-updated', {
+    detail: SEED_ROWS,
+    bubbles: true
+  }));
+  
+  // Intentar sincronizar automáticamente
+  console.log('📡 Intentando sincronización automática...');
   syncOnlineCsv();
 });
