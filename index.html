@@ -42,15 +42,11 @@
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="inicio">Inicio</button>
     <button class="tab" data-tab="tendencias">Tendencias</button>
-    <button class="tab" data-tab="heatmap">Mapa de calor</button>
-    <button class="tab" data-tab="instagram">Instagram</button>
-    <button class="tab" data-tab="facebook">Facebook</button>
-    <button class="tab" data-tab="tiktok">TikTok</button>
-    <button class="tab" data-tab="noticias">Noticias</button>
+    <button class="tab" data-tab="sentimiento">Sentimiento</button>
     <button class="tab" data-tab="narrativas">Narrativas</button>
-    <button class="tab" data-tab="verificacion">Verificación</button>
+    <button class="tab" data-tab="plataformas">Plataformas</button>
+    <button class="tab" data-tab="proyecciones">Proyecciones</button>
     <button class="tab" data-tab="datos">Datos</button>
-    <button class="tab" data-tab="metodologia">Metodología</button>
   </div>
 </div>
 
@@ -82,14 +78,108 @@
   </div>
 
   <section id="content">
-    <!-- Contenido dinámico (KPIs, gráficos, tablas) es responsabilidad de app.js y se activa con el evento csv-updated -->
+    
+    <!-- Tab: INICIO - KPIs enriquecidos -->
+    <div data-panel="inicio" class="tab-panel active">
+      <div id="kpi-section"></div>
+      <div style="margin-top: 30px;">
+        <div class="sec-head">
+          <h2>📈 Evolución de Interacciones</h2>
+          <span class="sec-note">Tendencias por tema en los últimos 30 días</span>
+        </div>
+        <div class="card" style="height: 300px;">
+          <canvas id="chartInteractionTrends"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: TENDENCIAS - Análisis de trends -->
+    <div data-panel="tendencias" class="tab-panel">
+      <div class="sec-head">
+        <h2>#️⃣ Análisis de Tendencias</h2>
+        <span class="sec-note">Hashtags, temas y patrones emergentes</span>
+      </div>
+      <div id="hashtagsTrends"></div>
+    </div>
+
+    <!-- Tab: SENTIMIENTO - Análisis de sentimiento por circunscripción -->
+    <div data-panel="sentimiento" class="tab-panel">
+      <div class="sec-head">
+        <h2>😊 Análisis de Sentimiento</h2>
+        <span class="sec-note">Sentimiento inferido por IA por circunscripción</span>
+      </div>
+      <div class="card" style="height: 350px;">
+        <canvas id="chartSentimentCircunscripcion"></canvas>
+      </div>
+    </div>
+
+    <!-- Tab: NARRATIVAS - Narrativas por circunscripción -->
+    <div data-panel="narrativas" class="tab-panel">
+      <div id="narrativesContainer"></div>
+    </div>
+
+    <!-- Tab: PLATAFORMAS - Análisis por plataforma -->
+    <div data-panel="plataformas" class="tab-panel">
+      <div id="platformsAnalysis"></div>
+    </div>
+
+    <!-- Tab: PROYECCIONES - Proyecciones de escenarios -->
+    <div data-panel="proyecciones" class="tab-panel">
+      <div id="scenarioProjections"></div>
+    </div>
+
+    <!-- Tab: DATOS - Tabla de datos completa -->
+    <div data-panel="datos" class="tab-panel">
+      <div class="sec-head">
+        <h2>📋 Datos Completos</h2>
+        <span class="sec-note">Vista detallada de todos los registros</span>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Fuente</th>
+              <th>Plataforma</th>
+              <th>Tema</th>
+              <th>Visualizaciones</th>
+              <th>Interacciones</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Rellenado dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </section>
+
 </main>
 
-<!-- Scripts: app.js debe cargarse antes del cargador para que los hooks existan -->
+<!-- ============================================================ -->
+<!-- ORDEN CRÍTICO DE CARGA DE SCRIPTS -->
+<!-- ============================================================ -->
+<!-- 1. Cargador CSV unificado (debe ser primero) -->
+<script src="csv-loader.js"></script>
+
+<!-- 2. Aplicación principal -->
 <script src="app.js"></script>
-<script src="data-loader.js"></script>
+
+<!-- 3. Módulo de análisis con IA -->
+<script src="analytics-radar.js"></script>
+
+<!-- 4. Módulo de simulación predictiva -->
+<script src="simulator-predictive.js"></script>
+
+<!-- 5. Módulo de dashboards enriquecidos -->
+<script src="dashboard-enriched.js"></script>
+
+<!-- 6. Hooks legados para compatibilidad -->
 <script src="csv-hooks.js"></script>
+
+<!-- 7. Data-loader legado (opcional, para compatibilidad) -->
+<script src="data-loader.js"></script>
 
 </body>
 </html>
