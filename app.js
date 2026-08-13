@@ -1,19 +1,19 @@
 const SEED_ROWS = [
-{fecha:"2026-06-22",fuente:"La Hora",tipo_registro:"Preparación de primarias",contenido_resumido:"Juan Arias aparece como posible precandidato de Juntos 70 para Ibarra; el movimiento convocó a su[...]"},
-{fecha:"2026-06-29",fuente:"La Hora",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Juan Fernando Arias fue elegido como precandidato de Juntos lista 70; participaron más de 3[...]"},
-{fecha:"2026-06-29",fuente:"Primera Zona",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"El movimiento Juntos ratificó a Juan Arias como precandidato a la Alcaldía de Ibarra [...]"},
-{fecha:"2026-06-29",fuente:"Diario El Norte",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se reportó la ratificación de Arias y su intención de construir una propuesta med[...]"},
-{fecha:"2026-06-29",fuente:"Expectativa",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se informó sobre la designación de Juan Arias y la presentación de precandidaturas a [...]"},
-{fecha:"2026-07-01",fuente:"OMCE Medios",tipo_registro:"Panorama electoral",contenido_resumido:"El medio incluyó a Juan Fernando Arias entre las precandidaturas para la Alcaldía de Ibarra y descr[...]"},
-{fecha:"2026-07-08",fuente:"Primera Zona",tipo_registro:"Escenario electoral",contenido_resumido:"Una medición atribuida a CONSULTAREC reportó 15% para Juan Arias, junto con 39% de indecisos. El [...]"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entrevista sobre modernización del mercado Amazonas, con una proyección de inversión de USD 40 mil[...]"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista aborda agua potable, mantenimiento y ampliación de pozos, y un plan maestro de agua y[...]"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista plantea modernización del transporte público y menciona el tren como parte de la mov[...]"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entre tres prioridades se mencionan mercado Amazonas, puente del ingreso norte y vinculación con la[...]"},
-{fecha:"2026-08-01",fuente:"OMCE Medios",tipo_registro:"Calendario electoral",contenido_resumido:"Se reportó la convocatoria oficial a elecciones el 1 de agosto y etapas posteriores del proceso e[...]"},
-{fecha:"2026-06-23",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Una noticia sobre violencia y ocupación de espacios públicos en Ibarra aporta contexto para el análisis d[...]"},
-{fecha:"2026-07-03",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Noticias sobre áreas verdes y protección de Guayabillas aportan contexto ambiental para el monitoreo de co[...]"},
-{fecha:"2026-07-17",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"La inauguración del Centro Cultural y Comercial El Torreón aparece entre las noticias locales de Ibarra de[...]"},
+{fecha:"2026-06-22",fuente:"La Hora",tipo_registro:"Preparación de primarias",contenido_resumido:"Juan Arias aparece como posible precandidato de Juntos 70 para Ibarra; el movimiento convocó a su primarias del 28 de junio.",tema:"Preparación electoral",entidad_o_contexto:"Juntos 70",url:"https://www.lahora.com.ec/imbaburacarchi/imbabura-juntos-lista-70-elegira-a-sus-precandidatos-para-las-seccionales-2027-20260622-0012.html",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-06-29",fuente:"La Hora",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Juan Fernando Arias fue elegido como precandidato de Juntos lista 70; participaron más de 300 militantes y dirigentes según la publicación.",tema:"Candidatura",entidad_o_contexto:"Juntos 70",url:"https://www.lahora.com.ec/imbaburacarchi/juntos-70-oficializa-a-juan-arias-como-precandidato-a-la-alcaldia-de-ibarra-20260629-0021.html",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-06-29",fuente:"Primera Zona",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"El movimiento Juntos ratificó a Juan Arias como precandidato a la Alcaldía de Ibarra tras las primarias del 28 de junio.",tema:"Candidatura",entidad_o_contexto:"Juntos 70",url:"https://primerazona.news/2026/06/juan-arias-ratificado-como-precandidato-a-la-alcaldia-de-ibarra-por-el-movimiento-juntos/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-06-29",fuente:"Diario El Norte",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se reportó la ratificación de Arias y su intención de construir una propuesta mediante diálogo con habitantes del cantón.",tema:"Participación ciudadana",entidad_o_contexto:"Juntos 70",url:"https://elnorte.ec/juan-arias-es-ratificado-como-precandidato-a-la-alcaldia-de-ibarra/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-06-29",fuente:"Expectativa",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se informó sobre la designación de Juan Arias y la presentación de precandidaturas a concejales.",tema:"Equipo político",entidad_o_contexto:"Juntos 70",url:"https://www.expectativa.ec/juan-arias-fue-ratificado-como-precandidato-a-la-alcaldia-de-ibarra/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-01",fuente:"OMCE Medios",tipo_registro:"Panorama electoral",contenido_resumido:"El medio incluyó a Juan Fernando Arias entre las precandidaturas para la Alcaldía de Ibarra y describió el proceso electoral en Imbabura.",tema:"Panorama electoral",entidad_o_contexto:"Ibarra",url:"https://omcemedios.com/omce/2026/07/01/mirador-politico-3/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-08",fuente:"Primera Zona",tipo_registro:"Escenario electoral",contenido_resumido:"Una medición atribuida a CONSULTAREC reportó 15% para Juan Arias, junto con 39% de indecisos. El dato corresponde a la encuesta citada por el medio y no equivale a una medición propia.",tema:"Encuestas",entidad_o_contexto:"Ibarra",url:"https://primerazona.news/2026/07/se-mantiene-una-eleccion-abierta-y-jose-moncayo-aparece-como-el-outsider-de-la-contienda/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entrevista sobre modernización del mercado Amazonas, con una proyección de inversión de USD 40 millones.",tema:"Comercio / mercado Amazonas",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista aborda agua potable, mantenimiento y ampliación de pozos, y un plan maestro de agua y alcantarillado.",tema:"Agua potable",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista plantea modernización del transporte público y menciona el tren como parte de la movilidad de Ibarra.",tema:"Movilidad",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entre tres prioridades se mencionan mercado Amazonas, puente del ingreso norte y vinculación con la academia para generar empleo joven.",tema:"Infraestructura / empleo joven",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-08-01",fuente:"OMCE Medios",tipo_registro:"Calendario electoral",contenido_resumido:"Se reportó la convocatoria oficial a elecciones el 1 de agosto y etapas posteriores del proceso electoral; el artículo lista a Arias entre las precandidaturas de Ibarra.",tema:"Calendario electoral",entidad_o_contexto:"Elecciones seccionales",url:"https://omcemedios.com/omce/2026/07/01/mirador-politico-3/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-06-23",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Una noticia sobre violencia y ocupación de espacios públicos en Ibarra aporta contexto para el análisis de temas locales, aunque no se refiere directamente a Arias.",tema:"Seguridad / espacio público",entidad_o_contexto:"Contexto de Ibarra",url:"https://www.lahora.com.ec/imbaburacarchi/",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-03",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Noticias sobre áreas verdes y protección de Guayabillas aportan contexto ambiental para el monitoreo de conversación pública en Ibarra.",tema:"Ambiente",entidad_o_contexto:"Contexto de Ibarra",url:"https://www.lahora.com.ec/tema/ibarra-t49650",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro construido a partir de información pública localizada; no representa opinión del electorado."},
+{fecha:"2026-07-17",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"La inauguración del Centro Cultural y Comercial El Torreón aparece entre las noticias locales de Ibarra del periodo.",tema:"Desarrollo urbano / cultura",entidad_o_contexto:"Contexto de Ibarra",url:"https://www.lahora.com.ec/tema/ibarra-t49650",sentimiento:"No inferido",verificacion:"Revisar fuente original",nota_metodologica:"Registro verificado."},
 ];
 
 const KNOWN_MEDIA = ["La Hora","Primera Zona","Diario El Norte","Expectativa","OMCE Medios"];
@@ -86,16 +86,6 @@ function deriveCategoria(tema, subtema){
   return {categoria: (tema && tema.trim()!="") ? tema.trim() : "Otros", emergente:true};
 }
 
-function extractHashtags(text){
-  if(!text) return [];
-  const s = String(text).replace(/[,\.\:\(\)\[\]\"'\“\”]/g,' ');
-  const tags = [];
-  const rx = /#([\p{L}0-9_\-]+)/gu;
-  let m;
-  while((m=rx.exec(s))!==null){ tags.push('#'+m[1].toLowerCase()); }
-  return [...new Set(tags)];
-}
-
 function normalizeRow(obj){
   const fechaRaw = pick(obj,['fecha']);
   const fecha = parseFechaFlexible(fechaRaw);
@@ -132,12 +122,8 @@ function normalizeRow(obj){
     comentarios: parseNumber(pick(obj,['comentarios'])),
     compartidos: parseNumber(pick(obj,['compartidos'])),
     visualizaciones: parseNumber(pick(obj,['visualizaciones'])),
-    guardados: parseNumber(pick(obj,['guardados','saves'])),
     hashtags: pick(obj,['hashtags']) || NA,
-    ubicacion: pick(obj,['ubicacion','ubicación','barrio']) || NA,
-    circunscripcion: pick(obj,['circunscripcion','circunscripción','circ']) || NA,
-    edad: pick(obj,['edad','age','edad_aproximada']) || NA,
-    audio: pick(obj,['audio','audio_used','music']) || NA,
+    ubicacion: pick(obj,['ubicacion','ubicación']) || NA,
     entidad_relacionada: pick(obj,['entidad_relacionada','entidad_o_contexto']) || NA,
     nivel_relevancia: parseNumber(pick(obj,['nivel_relevancia'])),
     requiere_verificacion: requiereVerif,
@@ -289,9 +275,7 @@ function populateFilterOptions(){
   sel('f-categoria', uniq(DATA.map(d=>d.categoria)));
 }
 ['f-plataforma','f-fuente','f-categoria','f-desde','f-hasta'].forEach(id=>{
-  const el = document.getElementById(id);
-  if(!el) return;
-  el.addEventListener('change', ()=>{
+  document.getElementById(id).addEventListener('change', ()=>{
     filters.plataforma = document.getElementById('f-plataforma').value;
     filters.fuente = document.getElementById('f-fuente').value;
     filters.categoria = document.getElementById('f-categoria').value;
@@ -300,14 +284,14 @@ function populateFilterOptions(){
     renderCurrentTab();
   });
 });
-const resetBtn = document.getElementById('reset'); if(resetBtn) resetBtn.addEventListener('click', resetFilters);
+document.getElementById('reset').addEventListener('click', resetFilters);
 function resetFilters(){
   filters = {plataforma:"", fuente:"", categoria:"", desde:"", hasta:""};
-  ['f-plataforma','f-fuente','f-categoria','f-desde','f-hasta'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  ['f-plataforma','f-fuente','f-categoria','f-desde','f-hasta'].forEach(id=>document.getElementById(id).value="");
   renderCurrentTab();
 }
-const fwindow = document.getElementById('f-window'); if(fwindow) fwindow.addEventListener('change', renderCurrentTab);
-const fmetric = document.getElementById('f-metric'); if(fmetric) fmetric.addEventListener('change', renderCurrentTab);
+document.getElementById('f-window')?.addEventListener('change', renderCurrentTab);
+document.getElementById('f-metric')?.addEventListener('change', renderCurrentTab);
 
 function getFiltered(){
   return DATA.filter(r=>{
@@ -379,66 +363,12 @@ function toneSuggestion(trend){
 let charts = {};
 function destroyChart(k){ if(charts[k]){ charts[k].destroy(); delete charts[k]; } }
 
-/* New: compute top hashtags by platform within windowDays */
-function computeHashtagsByPlatform(rows, windowDays){
-  const ref = maxDate(rows); if(!ref) return {};
-  const start = addDays(ref, -windowDays+1);
-  const windowRows = rows.filter(r=>r.fecha && r.fecha>=start && r.fecha<=ref);
-  const byPlat = {};
-  windowRows.forEach(r=>{
-    const plat = r.plataforma || 'Otros';
-    if(!byPlat[plat]) byPlat[plat] = {};
-    // prefer explicit hashtags field
-    let tags = [];
-    if(r.hashtags && r.hashtags!==NA){ tags = r.hashtags.split(/[;|,\n]+/).map(s=>s.trim()).filter(Boolean).flatMap(s=>extractHashtags(s)); }
-    if(tags.length===0) tags = extractHashtags(r.texto);
-    tags.forEach(t=>{ byPlat[plat][t] = (byPlat[plat][t]||0)+1; });
-  });
-  // convert to sorted arrays
-  const out = {};
-  Object.keys(byPlat).forEach(p=>{
-    out[p] = Object.entries(byPlat[p]).sort((a,b)=>b[1]-a[1]).map(([h,c])=>({hashtag:h,count:c}));
-  });
-  return out;
-}
-
-function renderHashtagsByPlatform(rows, windowDays){
-  const container = document.getElementById('hashtagsByPlatform');
-  if(!container) return;
-  const byPlat = computeHashtagsByPlatform(rows, windowDays);
-  if(Object.keys(byPlat).length===0){ container.innerHTML = '<div class="empty-state">No hay hashtags identificables en la ventana seleccionada.</div>'; return; }
-  let html = '';
-  Object.keys(byPlat).forEach(p=>{
-    const list = byPlat[p].slice(0,8);
-    html += `<div class="card" style="margin-bottom:10px;"><h3 class="disp" style="margin:0 0 8px 0;">${p}</h3>`;
-    if(list.length===0) html += `<div class="nav-hint">No hay hashtags detectados.</div>`;
-    else html += `<div style="display:flex;flex-wrap:wrap;gap:8px;">` + list.map(h=>`<span class="badge tag" style="cursor:pointer;" onclick="applyHashtagFilter('${h.hashtag.replace(/'/g,"\\'")}')">${h.hashtag} · ${h.count}</span>`).join('') + `</div>`;
-    html += `</div>`;
-  });
-  container.innerHTML = html;
-}
-function applyHashtagFilter(tag){
-  // apply filter by tag: set a temporary filter that matches rows containing the tag in hashtags or text
-  const lowered = tag.toLowerCase();
-  filters._hashtag = lowered;
-  renderCurrentTab();
-}
-
-function filterByHashtag(rows){
-  if(!filters._hashtag) return rows;
-  return rows.filter(r=>{
-    const h = (r.hashtags && r.hashtags!==NA ? r.hashtags.toLowerCase() : '') + ' ' + (r.texto? r.texto.toLowerCase():'');
-    return h.includes(filters._hashtag);
-  });
-}
-
 function renderAll(){
   populateFilterOptions();
   renderCurrentTab();
 }
 function renderCurrentTab(){
-  let data = getFiltered();
-  data = filterByHashtag(data);
+  const data = getFiltered();
   document.getElementById('filterCount').textContent = `${data.length} de ${DATA.length} registros visibles`;
   if(currentTab==='inicio') renderInicio(data);
   else if(currentTab==='tendencias') renderTendencias(data);
@@ -500,7 +430,7 @@ function renderInicio(data){
   destroyChart('volumen');
   charts.volumen = new Chart(document.getElementById('chartVolumen'), {
     type:'bar',
-    data:{labels:dateLabels, datasets:[{label:'Registros', data:dateLabels.map(l=>byDate[l]), backgroundColor:varOr('#B30000','#B30000'), borderRadius:4}]},
+    data:{labels:dateLabels, datasets:[{label:'Registros', data:dateLabels.map(l=>byDate[l]), backgroundColor:'#B30000', borderRadius:4}]},
     options:{plugins:{legend:{display:false}, title:{display:true,text:'Volumen de publicaciones por fecha'}}, scales:{y:{beginAtZero:true, ticks:{stepSize:1}}}}
   });
 
@@ -557,11 +487,8 @@ function renderInicio(data){
   document.getElementById('toneEmptyNote').innerHTML = allNoInfer ? `<div class="empty-state">El 100% de los registros filtrados no trae tono clasificado en el dato de origen. No se generó una interpretación de tono.</div>` : '';
 }
 
-// Helper used above for a fallback color (keeps code robust)
-function varOr(a,b){ return a||b; }
-
 function renderTendencias(data){
-  const win = parseInt(document.getElementById('f-window')?.value||'7');
+  const win = parseInt(document.getElementById('f-window').value||'7');
   const trends = computeTrends(data, win);
   document.getElementById('trendGrid').innerHTML = trends.length ? trends.map(t=>{
     const cls = t.tag;
@@ -607,9 +534,6 @@ function renderTendencias(data){
       <div>${d.texto}</div>
       <div class="tl-source">${d.fuente} · ${d.plataforma} · ${d.categoria}${d.emergente?' (categoría emergente)':''}</div>
     </div>`).join('') || '<div class="empty-state">No hay registros en el rango filtrado.</div>';
-
-  // render hashtags by platform in the trends tab
-  renderHashtagsByPlatform(data, win);
 }
 
 function renderHeatmap(data){
@@ -856,7 +780,7 @@ function renderVerificacion(data){
 
 function renderDatos(){
   document.getElementById('datasetMeta').textContent = `${DATA.length} registro(s) en memoria · última actualización: ${lastUpdateTs?lastUpdateTs.toLocaleString('es-EC'):'—'}.`;
-  const cols = ['fecha','plataforma','fuente','tipo_contenido','tema','categoria','tono','requiere_verificacion','circunscripcion','ubicacion','url'];
+  const cols = ['fecha','plataforma','fuente','tipo_contenido','tema','categoria','tono','requiere_verificacion','url'];
   const tbl = document.getElementById('fullTable');
   tbl.innerHTML = `<tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>` +
     DATA.map(d=>`<tr>${cols.map(c=>{ let v = c==='fecha' ? (d.fecha||d.fecha_raw) : d[c]; if(c==='url' && v!==NA) return `<td><a href="${v}" target="_blank" rel="noopener">Ver</a></td>`; return `<td>${v}</td>`; }).join('')}</tr>`).join('');
