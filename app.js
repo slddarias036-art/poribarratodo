@@ -269,11 +269,27 @@ function updateStatusIndicator(msg) {
 document.addEventListener('DOMContentLoaded', () => {
   setupTabNavigation();
 
-  const fileInput = document.getElementById('inputCsvFile');
+  // Soportar ambos IDs por compatibilidad: 'csvInput' (nuevo) y 'inputCsvFile' (antiguo)
+  const fileInput = document.getElementById('csvInput') || document.getElementById('inputCsvFile');
   if (fileInput) fileInput.addEventListener('change', handleFileUpload);
 
   const btnSync = document.getElementById('btnSyncOnline');
   if (btnSync) btnSync.addEventListener('click', syncOnlineCsv);
+
+  // Escuchar evento global cuando csv-hooks/data-loader despacha la actualización
+  document.addEventListener('csv-updated', function(ev){
+    try{
+      const rows = ev.detail || [];
+      if(Array.isArray(rows) && rows.length){
+        DATA = buildDataset(rows);
+        renderAll();
+        const last = document.getElementById('lastUpdate');
+        if(last) last.textContent = 'Última actualización: ' + (new Date()).toLocaleString();
+      }
+    }catch(e){
+      console.warn('csv-updated handler error', e);
+    }
+  });
 
   const cachedData = localStorage.getItem(STORAGE_KEYS.DATASET);
   if (cachedData) {
