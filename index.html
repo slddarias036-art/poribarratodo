@@ -6,8 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,15 +15,18 @@
     <div>
       <div class="eyebrow">Monitor de conversación pública &amp; cobertura mediática · Ibarra</div>
       <h1>IBARRA CIVIC RADAR</h1>
-      <div class="sub">Cobertura mediática y conversación pública sobre la precandidatura de Juan Fernando Arias Carvajal. Uso académico y descriptivo — ver <a href="#" onclick="goTab('metodologia');return false;" style="color:#8FCFC2;">metodología</a>.</div>
+      <div class="sub">Cobertura mediática y conversación pública sobre la precandidatura de Juan Fernando Arias Carvajal. Uso analítico para el equipo de campaña y comunicación pública.</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
-      <div style="display:flex;gap:8px;">
+      <div style="display:flex;gap:8px;align-items:center;">
         <button class="btn-upload" onclick="document.getElementById('csvInput').click()">↑ Actualizar datos (CSV)</button>
         <button class="btn-ghost" onclick="goTab('datos')">Ver datos</button>
         <input type="file" id="csvInput" accept=".csv" style="display:none;">
       </div>
-      <div class="update-pill"><span class="dot"></span><span id="lastUpdate">Última actualización: cargando…</span></div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <div class="update-pill"><span class="dot"></span><span id="lastUpdate">Última actualización: cargando…</span></div>
+        <div class="candidate-links"><a href="https://www.poribarratodo.com" target="_blank" rel="noopener">poribarratodo.com</a> · <a href="https://twitter.com/juanariasec" target="_blank" rel="noopener">@juanariasec</a></div>
+      </div>
     </div>
   </div>
   <div class="tabs" id="tabs">
@@ -117,7 +118,7 @@
   <div class="panel" id="panel-tendencias">
     <section class="block">
       <div class="sec-head"><h2>Radar de tendencias locales</h2></div>
-      <div class="sec-note">Ventana relativa a la fecha más reciente del conjunto de datos cargado (no es un reloj en tiempo real).</div>
+      <div class="sec-note">Ventana relativa a la fecha más reciente del conjunto de datos cargado (no es un reloj en tiempo real). Se muestran hashtags de tendencia por plataforma para facilitar la réplica comunicacional.</div>
       <div class="filter-bar" style="margin-bottom:22px;">
         <div class="field">
           <label class="f-label">Ventana temporal</label>
@@ -130,12 +131,16 @@
         </div>
       </div>
       <div class="trend-grid" id="trendGrid"></div>
+      <section class="block" style="margin-top:16px;">
+        <div class="sec-head"><h2>Hashtags por plataforma</h2></div>
+        <div class="card" id="hashtagsByPlatform"></div>
+      </section>
     </section>
 
     <section class="block">
       <div class="sec-head"><h2>Tono recomendado para comunicación pública</h2></div>
       <div class="disclaimer-box">
-        Recomendación <b>general</b> de tono comunicacional por tema, basada en volumen y variación observados. No constituye microsegmentación electoral, perfilamiento individual, predicción de intención de voto, ni inferencia sobre edad, género o situación económica. Generada por reglas heurísticas transparentes, no por un modelo de lenguaje.
+        Recomendación <b>general</b> de tono comunicacional por tema, basada en volumen y variación observados. No constituye microsegmentación electoral, perfilamiento individual, predicción ni asesoría jurídica.
       </div>
       <div class="table-scroll">
         <table class="data-table" id="toneTable"></table>
@@ -155,7 +160,8 @@
 
   <div class="panel" id="panel-heatmap">
     <section class="block">
-      <div class="sec-head"><h2>Mapa de calor: temas × plataformas</h2></div>
+      <div class="sec-head"><h2>Mapa de calor: unidades territoriales × temas</h2></div>
+      <div class="sec-note">El mapa está organizado por circunscripciones electorales del cantón Ibarra (1..11). Las intensidades (Alto / Medio / Bajo) se calculan sobre el volumen relativo de menciones por circunscripción.</div>
       <div class="filter-bar" style="margin-bottom:18px;">
         <div class="field">
           <label class="f-label">Métrica del mapa</label>
@@ -188,7 +194,7 @@
   <div class="panel" id="panel-narrativas">
     <section class="block">
       <div class="sec-head"><h2>Mapa de narrativas</h2></div>
-      <div class="sec-note">Cada nodo agrupa registros por categoría temática. El tamaño es proporcional al número de registros. Selecciona un nodo para ver el detalle: subtema, plataforma, fuente, URL, tendencia y nivel de confianza.</div>
+      <div class="sec-note">Cada nodo agrupa registros por categoría temática. El tamaño es proporcional al número de registros. Selecciona un nodo para ver el detalle: subtema, plataforma, fuente y sugerencia de tono.</div>
       <div class="card">
         <div class="bubble-field" id="narrativeBubbles"></div>
         <div id="narrativeDetail"></div>
@@ -210,7 +216,7 @@
       <div class="upload-box" id="dropZone">
         <p style="margin:0 0 10px 0;">Arrastra un archivo CSV aquí o</p>
         <button class="btn-upload" onclick="document.getElementById('csvInput').click()">Seleccionar CSV</button>
-        <p class="nav-hint" style="margin-top:12px;">Columnas admitidas: fecha, hora, fuente, plataforma, url, tipo_contenido, autor_o_medio, título, texto, tema, subtema, tono, interacciones, comentarios, compartidos, visualizaciones, hashtags, ubicacion, entidad_relacionada, nivel_relevancia, requiere_verificacion, fuente_verificacion, resumen_ia, tendencia, observaciones. El sistema también funciona con el CSV original de 10 columnas.</p>
+        <p class="nav-hint" style="margin-top:12px;">Columnas admitidas: fecha, hora, fuente, plataforma, url, tipo_contenido, autor_o_medio, título, texto, tema, subtema, tono, interacciones, comentarios, compartidos, visualizaciones, hashtags, ubicacion, edad</p>
       </div>
       <div class="card" id="uploadReport" style="margin-top:16px;display:none;">
         <div class="sec-head" style="margin-bottom:10px;"><h2 style="font-size:1rem;">Reporte de carga</h2></div>
@@ -220,30 +226,14 @@
 
     <section class="block">
       <div class="sec-head"><h2>Configuración de identidad visual</h2></div>
-      <div class="sec-note">No fue posible determinar con certeza la identidad visual de @poribarratodo desde este entorno (sin acceso a la referencia visual), por lo que no se inventaron colores ni tipografías. Puedes definirlos aquí; se aplican mediante variables CSS sin alterar la lógica del panel.</div>
+      <div class="sec-note">Para consistencia con la petición: la paleta por defecto está limitada a blanco / rojo / vino / rosa / amarillo y tipografías del sistema.</div>
       <div class="card">
         <div class="config-grid">
-          <div class="config-item"><label class="f-label">Color principal</label><input type="color" id="cfg-primary" value="#2F7A72"></div>
-          <div class="config-item"><label class="f-label">Color secundario</label><input type="color" id="cfg-secondary" value="#4C6B8A"></div>
-          <div class="config-item"><label class="f-label">Color de acento</label><input type="color" id="cfg-accent" value="#C97A2E"></div>
-          <div class="config-item"><label class="f-label">Color de fondo</label><input type="color" id="cfg-bg" value="#EEEFE7"></div>
-          <div class="config-item"><label class="f-label">Color de texto</label><input type="color" id="cfg-text" value="#1B2630"></div>
-          <div class="config-item"><label class="f-label">Tipografía de títulos</label>
-            <select id="cfg-fonttitle">
-              <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
-              <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
-              <option value="Georgia, serif">Georgia</option>
-              <option value="Arial, sans-serif">Arial</option>
-            </select>
-          </div>
-          <div class="config-item"><label class="f-label">Tipografía de cuerpo</label>
-            <select id="cfg-fontbody">
-              <option value="'Source Serif 4', serif">Source Serif 4</option>
-              <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
-              <option value="Georgia, serif">Georgia</option>
-              <option value="Arial, sans-serif">Arial</option>
-            </select>
-          </div>
+          <div class="config-item"><label class="f-label">Color principal</label><input type="color" id="cfg-primary" value="#B30000"></div>
+          <div class="config-item"><label class="f-label">Color secundario</label><input type="color" id="cfg-secondary" value="#6E001A"></div>
+          <div class="config-item"><label class="f-label">Color de acento</label><input type="color" id="cfg-accent" value="#FFB3C6"></div>
+          <div class="config-item"><label class="f-label">Color de fondo</label><input type="color" id="cfg-bg" value="#FFFFFF"></div>
+          <div class="config-item"><label class="f-label">Color de texto</label><input type="color" id="cfg-text" value="#2B2B2B"></div>
         </div>
         <button class="reset-btn" style="margin-top:14px;" onclick="applyConfig()">Aplicar identidad visual</button>
       </div>
@@ -262,7 +252,7 @@
     <section class="block">
       <div class="sec-head"><h2>Nota metodológica</h2></div>
       <div class="card">
-        <p>Este sistema analiza <b>conversación digital pública y cobertura mediática ya publicada</b>, a partir de registros verificables con fuente y enlace de origen. No mide ni representa la opinión del conjunto de la ciudadanía de Ibarra, no realiza segmentación de votantes, no infiere intención de voto ni genera recomendaciones de mensajes o persuasión electoral. Un mayor volumen de publicaciones o interacciones no se interpreta como mayor apoyo político. Los datos que no pudieron corroborarse se marcan explícitamente como "requiere verificación".</p>
+        <p>Este sistema analiza <b>conversación digital pública y cobertura mediática ya publicada</b>, a partir de registros verificables con fuente y enlace de origen. No mide ni representa la intención de voto.</p>
       </div>
     </section>
     <section class="block">
@@ -272,7 +262,7 @@
           <li>No se inventan publicaciones, interacciones, comentarios, visualizaciones, tendencias, fuentes ni sentimiento.</li>
           <li>Cuando una columna del CSV no existe o una celda está vacía, se muestra "Dato no disponible" — nunca se estima un valor.</li>
           <li>Una tendencia no se clasifica a partir de una sola publicación; se etiqueta como "evento aislado".</li>
-          <li>El tono sugerido para comunicación pública es una recomendación general basada en reglas visibles, no un juicio sobre personas ni grupos.</li>
+          <li>El tono sugerido para comunicación pública es una recomendación general basada en volumen y variación observados.</li>
           <li>Cobertura mediática y conversación en redes no se equiparan a opinión ciudadana representativa.</li>
           <li>Cada afirmación conserva fuente, URL y fecha cuando están disponibles.</li>
         </ul>
