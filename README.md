@@ -1,52 +1,45 @@
-# Por Ibarra Todo — Ibarra Civic Radar
+# Ibarra Civic Radar — Monetizable Project Idea
 
-Proyecto: Ibarra Civic Radar (poribarratodo)
-Descripción corta: Monitor de conversación pública y cobertura mediática para la precandidatura de Juan Arias — panel interactivo pensado para equipos de campaña y comunicación local.
+Una versión mejorada de *Ibarra Civic Radar* que carga datos en tiempo real desde un CSV público y ofrece análisis y visualizaciones para clientes locales (medios, campañas, consultoras).
 
-Resumen del proyecto
-- Interfaz ligera (HTML/CSS/JS) que procesa CSVs con registros de medios y redes sociales y genera dashboards: Inicio, Tendencias, Mapa de calor por circunscripciones, paneles por plataforma (Instagram / Facebook / TikTok), Noticias, Narrativas y Verificación.
-- Pensado para equipos locales: permite actualizar datos arrastrando un CSV, aplicar filtros, extraer hashtags por plataforma y priorizar acciones comunicacionales.
+Características principales
 
-Por qué es una oportunidad de negocio
-- Herramienta focalizada en campañas locales y gobiernos municipales: mercado con necesidades repetibles (consultoras, partidos, precandidaturas, ONGs).
-- Bajo coste de entrada: es una web estática que puede desplegarse en hosting económico y empaquetarse con integración a hojas de cálculo / flujos de ingestión CSV.
-- Posibilidades de monetización recurrente: suscripciones para acceso a fuentes en tiempo real (integración con APIs de social listening), personalización por cliente (branding, métricas a medida), y servicios profesionales (análisis, dashboards personalizados y soporte).
+- Carga automática del CSV alojado (ej.: GitHub raw) al hacer click en "Actualizar datos".
+- Análisis en el navegador: tendencias, mapa de calor, verificación, tablas, gráficos (Chart.js + PapaParse).
+- API/Integración opcional: servir el CSV desde un endpoint que permita autenticación y métricas.
+- Paneles personalizables y exportación (CSV/PDF).
 
-Modelos de monetización sugeridos
-1. SaaS (suscripción mensual)
-   - Plan Básico: carga manual de CSV, 1 usuario, acceso a dashboards, soporte por email.
-   - Plan Profesional: integración con APIs (Facebook/Instagram/TikTok), ingestión automática, alertas por email/Slack, 3 usuarios.
-   - Plan Agencia: múltiples campañas, exportes avanzados, asistencia prioritaria y entrenamiento.
+Ideas de monetización
 
-2. Servicios adicionales (one-off / retainer)
-   - Curaduría de datos y pipelines (normalización de CSV y scraping legal de medios locales).
-   - Mapas territoriales y modelado de circunscripciones con geocodificación y auditoría de datos.
-   - Consultoría estratégica: paquetes de recomendaciones de comunicación y guiones para redes.
+- Planes SaaS: nivel gratuito con datos limitados y suscripción para datos históricos y exportes.
+- Servicios de consultoría de análisis a gobiernos locales y organizaciones civiles.
+- Integración de alertas premium (email/SMS) y dashboards privados para clientes.
+- White-label para consultoras y medios.
 
-3. White-label y licencias institucionales
-   - Licencia para partidos, consultoras y medios: implementación white-label, integración con marca y hosting propio.
+Cómo integrar el cargador automático (instrucciones rápidas)
 
-Propuesta de valor para clientes
-- Rápida visibilidad: transforma datos locales en decisiones (qué temas impulsar, qué hashtags usar, dónde concentrar actividades de terreno).
-- Transparencia y trazabilidad: cada registro mantiene fuente y URL, ideal para compliance y comunicación responsable.
-- Bajo riesgo técnico: funciona offline con CSVs si la integración con APIs no es posible por restricciones de acceso.
+1. Añade el archivo `data-loader.js` al repositorio (ya incluido en este commit).
+2. Inserta una referencia en `index.html` justo antes del cierre del `</body>`:
 
-Cómo probarlo (rápido)
-1. Clona el repo y abre `index.html` en un servidor local (por ejemplo: `python -m http.server` en la carpeta del proyecto). 
-2. Sube el CSV de ejemplo `sample_enriched_ibarra.csv` desde la pestaña "Datos" → "Actualizar datos (CSV)". 
-3. Revisa: Tendencias (hashtags por plataforma), Mapa de calor (circunscripciones), y paneles de Instagram/Facebook/TikTok.
+```html
+<script src="app.js"></script>
+<script src="data-loader.js"></script>
+</body>
+```
 
-Siguientes pasos recomendados (mínimos para un MVP comercial)
-- Integrar autenticación y gestión de usuarios.
-- Conectar integraciones opcionales con APIs de redes para ingestión automatizada.
-- Añadir exportes automáticos (CSV/Excel/PDF) y notificaciones por email/Slack.
-- Documentación de CSV y onboarding para clientes (plantillas y validadores).
+3. Ajusta la constante `CSV_URL` dentro de `data-loader.js` al enlace raw donde está tu CSV (por ejemplo `https://raw.githubusercontent.com/<owner>/<repo>/main/archivo.csv`).
+4. Asegúrate de que el origen que sirve el CSV soporte CORS (raw.githubusercontent.com funciona correctamente).
 
-Contacto y licencia
-- Autor / repositorio: slddarias036-art/poribarratodo
-- Propósito: prototipo analítico; licencia: MIT (sugerida — ajustar según necesidad legal).
+Notas técnicas
+
+- `data-loader.js` expone los datos en `window.CSV_DATA` y lanza el evento `csv-updated` cuando los datos cambian.
+- Si tu aplicación ya tiene un callback `onCSVLoaded`, el cargador llamará a esa función automáticamente.
+
+Siguientes pasos
+
+- Puedo actualizar `index.html` y `app.js` para integrar el cargador directamente si quieres que haga los cambios automáticamente.
+- También puedo añadir un pequeño servidor (Node/Express) para servir y proteger el CSV si deseas control de actualizaciones en tiempo real.
 
 ---
 
-Elevator pitch (1 línea):
-Ibarra Civic Radar transforma la conversación local en decisiones de campaña accionables — desde hashtags virales hasta mapas de calor por circunscripción — con una plataforma ligera, fácil de desplegar y pensada para monetizar mediante integraciones y consultoría especializada.
+Si quieres que aplique los cambios directamente en `index.html` y `app.js` (para que el botón haga fetch sin editar manualmente), dime y lo hago: reemplazaré las líneas necesarias y haré commit.
