@@ -1,19 +1,19 @@
 const SEED_ROWS = [
-{fecha:"2026-06-22",fuente:"La Hora",tipo_registro:"Preparación de primarias",contenido_resumido:"Juan Arias aparece como posible precandidato de Juntos 70 para Ibarra; el movimiento convocó a sus primarias del 28 de junio.",tema:"Preparación electoral",entidad_o_contexto:"Juntos 70",url:"https://www.lahora.com.ec/imbaburacarchi/imbabura-juntos-lista-70-elegira-a-sus-precandidatos-para-las-seccionales-2027-20260622-0012.html",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"La Hora",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Juan Fernando Arias fue elegido como precandidato de Juntos lista 70; participaron más de 300 militantes y dirigentes según la publicación.",tema:"Candidatura",entidad_o_contexto:"Juntos 70",url:"https://www.lahora.com.ec/imbaburacarchi/juntos-70-oficializa-a-juan-arias-como-precandidato-a-la-alcaldia-de-ibarra-20260629-0021.html",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"Primera Zona",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"El movimiento Juntos ratificó a Juan Arias como precandidato a la Alcaldía de Ibarra tras las primarias del 28 de junio.",tema:"Candidatura",entidad_o_contexto:"Juntos 70",url:"https://primerazona.news/2026/06/juan-arias-ratificado-como-precandidato-a-la-alcaldia-de-ibarra-por-el-movimiento-juntos/",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"Diario El Norte",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se reportó la ratificación de Arias y su intención de construir una propuesta mediante diálogo con habitantes del cantón.",tema:"Participación ciudadana",entidad_o_contexto:"Juntos 70",url:"https://elnorte.ec/juan-arias-es-ratificado-como-precandidato-a-la-alcaldia-de-ibarra/",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-29",fuente:"Expectativa",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se informó sobre la designación de Juan Arias y la presentación de precandidaturas a concejales.",tema:"Equipo político",entidad_o_contexto:"Juntos 70",url:"https://www.expectativa.ec/juan-arias-fue-ratificado-como-precandidato-a-la-alcaldia-de-ibarra/",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-01",fuente:"OMCE Medios",tipo_registro:"Panorama electoral",contenido_resumido:"El medio incluyó a Juan Fernando Arias entre las precandidaturas para la Alcaldía de Ibarra y describió el proceso electoral en Imbabura.",tema:"Panorama electoral",entidad_o_contexto:"Ibarra",url:"https://omcemedios.com/omce/2026/07/01/mirador-politico-3/",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-08",fuente:"Primera Zona",tipo_registro:"Escenario electoral",contenido_resumido:"Una medición atribuida a CONSULTAREC reportó 15% para Juan Arias, junto con 39% de indecisos. El dato corresponde a la encuesta citada por el medio y no equivale a una medición propia.",tema:"Encuestas",entidad_o_contexto:"Ibarra",url:"https://primerazona.news/2026/07/se-mantiene-una-eleccion-abierta-y-jose-moncayo-aparece-como-el-outsider-de-la-contienda/",sentimiento:"No inferido",verificacion:"Requiere verificación — dato de encuesta de tercero (CONSULTAREC), no medición propia"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entrevista sobre modernización del mercado Amazonas, con una proyección de inversión de USD 40 millones.",tema:"Comercio / mercado Amazonas",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista aborda agua potable, mantenimiento y ampliación de pozos, y un plan maestro de agua y alcantarillado.",tema:"Agua potable",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista plantea modernización del transporte público y menciona el tren como parte de la movilidad de Ibarra.",tema:"Movilidad",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entre tres prioridades se mencionan mercado Amazonas, puente del ingreso norte y vinculación con la academia para generar empleo joven.",tema:"Infraestructura / empleo joven",entidad_o_contexto:"Propuesta de Juan Arias",url:"https://www.lahora.com.ec/imbaburacarchi/juan-arias-nuestra-proyeccion-es-invertir-40-millones-para-modernizar-el-mercado-amazonas-20260725-0013.html",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-08-01",fuente:"OMCE Medios",tipo_registro:"Calendario electoral",contenido_resumido:"Se reportó la convocatoria oficial a elecciones el 1 de agosto y etapas posteriores del proceso electoral; el artículo lista a Arias entre las precandidaturas de Ibarra.",tema:"Calendario electoral",entidad_o_contexto:"Elecciones seccionales",url:"https://omcemedios.com/omce/2026/07/01/mirador-politico-3/",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-06-23",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Una noticia sobre violencia y ocupación de espacios públicos en Ibarra aporta contexto para el análisis de temas locales, aunque no se refiere directamente a Arias.",tema:"Seguridad / espacio público",entidad_o_contexto:"Contexto de Ibarra",url:"https://www.lahora.com.ec/imbaburacarchi/",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-03",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Noticias sobre áreas verdes y protección de Guayabillas aportan contexto ambiental para el monitoreo de conversación pública en Ibarra.",tema:"Ambiente",entidad_o_contexto:"Contexto de Ibarra",url:"https://www.lahora.com.ec/tema/ibarra-t49650",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
-{fecha:"2026-07-17",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"La inauguración del Centro Cultural y Comercial El Torreón aparece entre las noticias locales de Ibarra del periodo.",tema:"Desarrollo urbano / cultura",entidad_o_contexto:"Contexto de Ibarra",url:"https://www.lahora.com.ec/tema/ibarra-t49650",sentimiento:"No inferido",verificacion:"Revisar fuente original"},
+{fecha:"2026-06-22",fuente:"La Hora",tipo_registro:"Preparación de primarias",contenido_resumido:"Juan Arias aparece como posible precandidato de Juntos 70 para Ibarra; el movimiento convocó a su[...]"},
+{fecha:"2026-06-29",fuente:"La Hora",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Juan Fernando Arias fue elegido como precandidato de Juntos lista 70; participaron más de 3[...]"},
+{fecha:"2026-06-29",fuente:"Primera Zona",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"El movimiento Juntos ratificó a Juan Arias como precandidato a la Alcaldía de Ibarra [...]"},
+{fecha:"2026-06-29",fuente:"Diario El Norte",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se reportó la ratificación de Arias y su intención de construir una propuesta med[...]"},
+{fecha:"2026-06-29",fuente:"Expectativa",tipo_registro:"Ratificación de precandidatura",contenido_resumido:"Se informó sobre la designación de Juan Arias y la presentación de precandidaturas a [...]"},
+{fecha:"2026-07-01",fuente:"OMCE Medios",tipo_registro:"Panorama electoral",contenido_resumido:"El medio incluyó a Juan Fernando Arias entre las precandidaturas para la Alcaldía de Ibarra y descr[...]"},
+{fecha:"2026-07-08",fuente:"Primera Zona",tipo_registro:"Escenario electoral",contenido_resumido:"Una medición atribuida a CONSULTAREC reportó 15% para Juan Arias, junto con 39% de indecisos. El [...]"},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entrevista sobre modernización del mercado Amazonas, con una proyección de inversión de USD 40 mil[...]"},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista aborda agua potable, mantenimiento y ampliación de pozos, y un plan maestro de agua y[...]"},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"La entrevista plantea modernización del transporte público y menciona el tren como parte de la mov[...]"},
+{fecha:"2026-07-25",fuente:"La Hora",tipo_registro:"Propuestas de campaña",contenido_resumido:"Entre tres prioridades se mencionan mercado Amazonas, puente del ingreso norte y vinculación con la[...]"},
+{fecha:"2026-08-01",fuente:"OMCE Medios",tipo_registro:"Calendario electoral",contenido_resumido:"Se reportó la convocatoria oficial a elecciones el 1 de agosto y etapas posteriores del proceso e[...]"},
+{fecha:"2026-06-23",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Una noticia sobre violencia y ocupación de espacios públicos en Ibarra aporta contexto para el análisis d[...]"},
+{fecha:"2026-07-03",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"Noticias sobre áreas verdes y protección de Guayabillas aportan contexto ambiental para el monitoreo de co[...]"},
+{fecha:"2026-07-17",fuente:"La Hora",tipo_registro:"Contexto local",contenido_resumido:"La inauguración del Centro Cultural y Comercial El Torreón aparece entre las noticias locales de Ibarra de[...]"},
 ];
 
 const KNOWN_MEDIA = ["La Hora","Primera Zona","Diario El Norte","Expectativa","OMCE Medios"];
@@ -26,7 +26,7 @@ function normVal(v){
 function pick(obj, keys){
   for(const k of keys){
     const found = Object.keys(obj).find(h=>h.toLowerCase().trim()===k);
-    if(found && normVal(obj[found])!=="") return normVal(obj[found]);
+    if(found && normVal(obj[found])!="") return normVal(obj[found]);
   }
   return "";
 }
@@ -57,7 +57,7 @@ function normalizePlataforma(raw, fuente, tipoContenido){
   if(s.includes('face')||s==='fb') return 'Facebook';
   if(s.includes('tiktok')||s==='tt') return 'TikTok';
   if(s.includes('medio')||s.includes('prensa')||s.includes('digital')) return 'Medios digitales';
-  if(raw && normVal(raw)!=="") return normVal(raw);
+  if(raw && normVal(raw)!="") return normVal(raw);
   if(KNOWN_MEDIA.includes(fuente)) return 'Medios digitales';
   return NA;
 }
@@ -83,7 +83,17 @@ function deriveCategoria(tema, subtema){
   for(const [cat, re] of CATEGORY_KEYWORDS){
     if(re.test(text)) return {categoria:cat, emergente: cat==="Proceso electoral / candidatura" || cat==="Desarrollo urbano y cultura"};
   }
-  return {categoria: (tema && tema.trim()!=="") ? tema.trim() : "Otros", emergente:true};
+  return {categoria: (tema && tema.trim()!="") ? tema.trim() : "Otros", emergente:true};
+}
+
+function extractHashtags(text){
+  if(!text) return [];
+  const s = String(text).replace(/[,\.\:\(\)\[\]\"'\“\”]/g,' ');
+  const tags = [];
+  const rx = /#([\p{L}0-9_\-]+)/gu;
+  let m;
+  while((m=rx.exec(s))!==null){ tags.push('#'+m[1].toLowerCase()); }
+  return [...new Set(tags)];
 }
 
 function normalizeRow(obj){
@@ -122,8 +132,12 @@ function normalizeRow(obj){
     comentarios: parseNumber(pick(obj,['comentarios'])),
     compartidos: parseNumber(pick(obj,['compartidos'])),
     visualizaciones: parseNumber(pick(obj,['visualizaciones'])),
+    guardados: parseNumber(pick(obj,['guardados','saves'])),
     hashtags: pick(obj,['hashtags']) || NA,
-    ubicacion: pick(obj,['ubicacion','ubicación']) || NA,
+    ubicacion: pick(obj,['ubicacion','ubicación','barrio']) || NA,
+    circunscripcion: pick(obj,['circunscripcion','circunscripción','circ']) || NA,
+    edad: pick(obj,['edad','age','edad_aproximada']) || NA,
+    audio: pick(obj,['audio','audio_used','music']) || NA,
     entidad_relacionada: pick(obj,['entidad_relacionada','entidad_o_contexto']) || NA,
     nivel_relevancia: parseNumber(pick(obj,['nivel_relevancia'])),
     requiere_verificacion: requiereVerif,
@@ -174,7 +188,7 @@ function setUpdatePill(sourceLabel){
   el.textContent = `Última actualización: ${ts} · ${sourceLabel}`;
 }
 
-const EXPECTED_COLS = ["fecha","hora","fuente","plataforma","url","tipo_contenido","autor_o_medio","título","texto","tema","subtema","tono","interacciones","comentarios","compartidos","visualizaciones","hashtags","ubicacion","entidad_relacionada","nivel_relevancia","requiere_verificacion","fuente_verificacion","resumen_ia","tendencia","observaciones"];
+const EXPECTED_COLS = ["fecha","hora","fuente","plataforma","url","tipo_contenido","autor_o_medio","título","texto","tema","subtema","tono","interacciones","comentarios","compartidos","visualiza..."];
 const LEGACY_COLS = ["fecha","fuente","tipo_registro","contenido_resumido","tema","entidad_o_contexto","url","sentimiento","verificacion","nota_metodologica"];
 
 document.getElementById('csvInput').addEventListener('change', e=>{
@@ -275,7 +289,9 @@ function populateFilterOptions(){
   sel('f-categoria', uniq(DATA.map(d=>d.categoria)));
 }
 ['f-plataforma','f-fuente','f-categoria','f-desde','f-hasta'].forEach(id=>{
-  document.getElementById(id).addEventListener('change', ()=>{
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('change', ()=>{
     filters.plataforma = document.getElementById('f-plataforma').value;
     filters.fuente = document.getElementById('f-fuente').value;
     filters.categoria = document.getElementById('f-categoria').value;
@@ -284,14 +300,14 @@ function populateFilterOptions(){
     renderCurrentTab();
   });
 });
-document.getElementById('reset').addEventListener('click', resetFilters);
+const resetBtn = document.getElementById('reset'); if(resetBtn) resetBtn.addEventListener('click', resetFilters);
 function resetFilters(){
   filters = {plataforma:"", fuente:"", categoria:"", desde:"", hasta:""};
-  ['f-plataforma','f-fuente','f-categoria','f-desde','f-hasta'].forEach(id=>document.getElementById(id).value="");
+  ['f-plataforma','f-fuente','f-categoria','f-desde','f-hasta'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   renderCurrentTab();
 }
-document.getElementById('f-window')?.addEventListener('change', renderCurrentTab);
-document.getElementById('f-metric')?.addEventListener('change', renderCurrentTab);
+const fwindow = document.getElementById('f-window'); if(fwindow) fwindow.addEventListener('change', renderCurrentTab);
+const fmetric = document.getElementById('f-metric'); if(fmetric) fmetric.addEventListener('change', renderCurrentTab);
 
 function getFiltered(){
   return DATA.filter(r=>{
@@ -304,7 +320,7 @@ function getFiltered(){
   }).sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||''));
 }
 
-const COLORS = ['#2F7A72','#4C6B8A','#C97A2E','#8A9198','#6E9E90','#7A93AE','#B98E5E','#5B6670','#7A3EB0','#2E6B3E'];
+const COLORS = ['#B30000','#6E001A','#FFB3C6','#FFD24C','#8A7A7A','#7A3EB0','#2E6B3E'];
 const PLATFORMS = ['Instagram','Facebook','TikTok','Medios digitales'];
 
 function maxDate(rows){
@@ -363,12 +379,66 @@ function toneSuggestion(trend){
 let charts = {};
 function destroyChart(k){ if(charts[k]){ charts[k].destroy(); delete charts[k]; } }
 
+/* New: compute top hashtags by platform within windowDays */
+function computeHashtagsByPlatform(rows, windowDays){
+  const ref = maxDate(rows); if(!ref) return {};
+  const start = addDays(ref, -windowDays+1);
+  const windowRows = rows.filter(r=>r.fecha && r.fecha>=start && r.fecha<=ref);
+  const byPlat = {};
+  windowRows.forEach(r=>{
+    const plat = r.plataforma || 'Otros';
+    if(!byPlat[plat]) byPlat[plat] = {};
+    // prefer explicit hashtags field
+    let tags = [];
+    if(r.hashtags && r.hashtags!==NA){ tags = r.hashtags.split(/[;|,\n]+/).map(s=>s.trim()).filter(Boolean).flatMap(s=>extractHashtags(s)); }
+    if(tags.length===0) tags = extractHashtags(r.texto);
+    tags.forEach(t=>{ byPlat[plat][t] = (byPlat[plat][t]||0)+1; });
+  });
+  // convert to sorted arrays
+  const out = {};
+  Object.keys(byPlat).forEach(p=>{
+    out[p] = Object.entries(byPlat[p]).sort((a,b)=>b[1]-a[1]).map(([h,c])=>({hashtag:h,count:c}));
+  });
+  return out;
+}
+
+function renderHashtagsByPlatform(rows, windowDays){
+  const container = document.getElementById('hashtagsByPlatform');
+  if(!container) return;
+  const byPlat = computeHashtagsByPlatform(rows, windowDays);
+  if(Object.keys(byPlat).length===0){ container.innerHTML = '<div class="empty-state">No hay hashtags identificables en la ventana seleccionada.</div>'; return; }
+  let html = '';
+  Object.keys(byPlat).forEach(p=>{
+    const list = byPlat[p].slice(0,8);
+    html += `<div class="card" style="margin-bottom:10px;"><h3 class="disp" style="margin:0 0 8px 0;">${p}</h3>`;
+    if(list.length===0) html += `<div class="nav-hint">No hay hashtags detectados.</div>`;
+    else html += `<div style="display:flex;flex-wrap:wrap;gap:8px;">` + list.map(h=>`<span class="badge tag" style="cursor:pointer;" onclick="applyHashtagFilter('${h.hashtag.replace(/'/g,"\\'")}')">${h.hashtag} · ${h.count}</span>`).join('') + `</div>`;
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+function applyHashtagFilter(tag){
+  // apply filter by tag: set a temporary filter that matches rows containing the tag in hashtags or text
+  const lowered = tag.toLowerCase();
+  filters._hashtag = lowered;
+  renderCurrentTab();
+}
+
+function filterByHashtag(rows){
+  if(!filters._hashtag) return rows;
+  return rows.filter(r=>{
+    const h = (r.hashtags && r.hashtags!==NA ? r.hashtags.toLowerCase() : '') + ' ' + (r.texto? r.texto.toLowerCase():'');
+    return h.includes(filters._hashtag);
+  });
+}
+
 function renderAll(){
   populateFilterOptions();
   renderCurrentTab();
 }
 function renderCurrentTab(){
-  const data = getFiltered();
+  let data = getFiltered();
+  data = filterByHashtag(data);
   document.getElementById('filterCount').textContent = `${data.length} de ${DATA.length} registros visibles`;
   if(currentTab==='inicio') renderInicio(data);
   else if(currentTab==='tendencias') renderTendencias(data);
@@ -414,7 +484,7 @@ function renderInicio(data){
   data.forEach(d=>catCounts[d.categoria]=(catCounts[d.categoria]||0)+1);
   const topCat = Object.entries(catCounts).sort((a,b)=>b[1]-a[1])[0];
   document.getElementById('resumen-texto').innerHTML =
-    `Dentro del conjunto filtrado (<b>${data.length}</b> registros, ${fuentes.length} fuente(s)), la categoría con mayor presencia es <b>${topCat?topCat[0]:'—'}</b> (${topCat?topCat[1]:0} registros).`;
+    `Dentro del conjunto filtrado (<b>${data.length}</b> registros, ${fuentes.length} fuente(s)), la categoría con mayor presencia es <b>${topCat?topCat[0]:'—'}</b> (${topCat?topCat[1]:0} registro(s)).`;
   const bullets = [];
   const withPlat = uniq(data.map(d=>d.plataforma));
   bullets.push(`Plataformas presentes en el conjunto: ${withPlat.length?withPlat.join(', '):NA}.`);
@@ -430,10 +500,11 @@ function renderInicio(data){
   destroyChart('volumen');
   charts.volumen = new Chart(document.getElementById('chartVolumen'), {
     type:'bar',
-    data:{labels:dateLabels, datasets:[{label:'Registros', data:dateLabels.map(l=>byDate[l]), backgroundColor:'#2F7A72', borderRadius:4}]},
+    data:{labels:dateLabels, datasets:[{label:'Registros', data:dateLabels.map(l=>byDate[l]), backgroundColor:varOr('#B30000','#B30000'), borderRadius:4}]},
     options:{plugins:{legend:{display:false}, title:{display:true,text:'Volumen de publicaciones por fecha'}}, scales:{y:{beginAtZero:true, ticks:{stepSize:1}}}}
   });
 
+  // Ranking
   const catEntries = Object.entries(catCounts).sort((a,b)=>b[1]-a[1]);
   destroyChart('ranking');
   charts.ranking = new Chart(document.getElementById('chartRanking'), {
@@ -442,14 +513,16 @@ function renderInicio(data){
     options:{indexAxis:'y', plugins:{legend:{display:false}, title:{display:true,text:'Ranking de categorías temáticas'}}, scales:{x:{beginAtZero:true,ticks:{stepSize:1}}}}
   });
 
+  // Platform volumes
   const platCounts = PLATFORMS.map(p=>data.filter(d=>d.plataforma===p).length);
   destroyChart('platvol');
   charts.platvol = new Chart(document.getElementById('chartPlatVol'), {
     type:'bar',
-    data:{labels:PLATFORMS, datasets:[{label:'Publicaciones', data:platCounts, backgroundColor:['#C13584','#4267B2','#010101','#4C6B8A'], borderRadius:4}]},
+    data:{labels:PLATFORMS, datasets:[{label:'Publicaciones', data:platCounts, backgroundColor:['#C13584','#4267B2','#010101','#6E001A'], borderRadius:4}]},
     options:{plugins:{legend:{display:false}, title:{display:true,text:'Publicaciones por plataforma'}}, scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}
   });
 
+  // Engagement by platform
   const engMetrics = ['interacciones','comentarios','compartidos','visualizaciones'];
   const engDatasets = engMetrics.map((m,i)=>({
     label:m, data: PLATFORMS.map(p=>{
@@ -467,9 +540,10 @@ function renderInicio(data){
       options:{plugins:{title:{display:true,text:'Interacciones por plataforma (suma de datos disponibles)'}}, scales:{y:{beginAtZero:true}}}
     });
   } else if(engCanvas) {
-    engCanvas.parentElement.innerHTML = '<div class="empty-state" style="height:100%;display:flex;align-items:center;">Ningún registro del conjunto filtrado incluye interacciones, comentarios, compartidos o visualizaciones. "Dato no disponible" en el CSV de origen.</div>';
+    engCanvas.parentElement.innerHTML = '<div class="empty-state" style="height:100%;display:flex;align-items:center;">Ningún registro del conjunto filtrado incluye interacciones, comentarios o visualizaciones.</div>';
   }
 
+  // Tone
   const tonoCounts = {};
   data.forEach(d=>{ const t = d.tono!==NA? d.tono : 'No inferido / dato no disponible'; tonoCounts[t]=(tonoCounts[t]||0)+1; });
   const tonoEntries = Object.entries(tonoCounts);
@@ -480,11 +554,14 @@ function renderInicio(data){
     options:{plugins:{title:{display:true,text:'Tono reportado en el dato de origen'}}}
   });
   const allNoInfer = tonoEntries.length===1 && tonoEntries[0][0].includes('No inferido');
-  document.getElementById('toneEmptyNote').innerHTML = allNoInfer ? `<div class="empty-state">El 100% de los registros filtrados no trae tono clasificado en el dato de origen. No se generó una inferencia automática de sentimiento a partir de titulares o resúmenes.</div>` : `<div class="sec-note">Distribución basada exclusivamente en el campo "tono" del CSV, cuando está disponible.</div>`;
+  document.getElementById('toneEmptyNote').innerHTML = allNoInfer ? `<div class="empty-state">El 100% de los registros filtrados no trae tono clasificado en el dato de origen. No se generó una interpretación de tono.</div>` : '';
 }
 
+// Helper used above for a fallback color (keeps code robust)
+function varOr(a,b){ return a||b; }
+
 function renderTendencias(data){
-  const win = parseInt(document.getElementById('f-window').value||'7');
+  const win = parseInt(document.getElementById('f-window')?.value||'7');
   const trends = computeTrends(data, win);
   document.getElementById('trendGrid').innerHTML = trends.length ? trends.map(t=>{
     const cls = t.tag;
@@ -530,48 +607,54 @@ function renderTendencias(data){
       <div>${d.texto}</div>
       <div class="tl-source">${d.fuente} · ${d.plataforma} · ${d.categoria}${d.emergente?' (categoría emergente)':''}</div>
     </div>`).join('') || '<div class="empty-state">No hay registros en el rango filtrado.</div>';
+
+  // render hashtags by platform in the trends tab
+  renderHashtagsByPlatform(data, win);
 }
 
 function renderHeatmap(data){
-  const metric = document.getElementById('f-metric').value;
-  const cats = uniq(data.map(d=>d.categoria));
-  const metricFn = (rows)=>{
-    if(metric==='publicaciones') return rows.length;
-    if(metric==='relevancia'){ const v = rows.map(r=>r.nivel_relevancia).filter(x=>x!=null); return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length*10)/10:null; }
-    const key = metric;
-    const v = rows.map(r=>r[key]).filter(x=>x!=null);
-    return v.length ? v.reduce((a,b)=>a+b,0) : null;
-  };
-  const matrix = cats.map(cat=> PLATFORMS.map(p=> metricFn(data.filter(d=>d.categoria===cat && d.plataforma===p))) );
-  const flat = matrix.flat().filter(v=>v!=null && v>0);
-  const max = flat.length?Math.max(...flat):1;
-  let html = `<tr><th>Tema \\ Plataforma</th>${PLATFORMS.map(p=>`<th>${p}</th>`).join('')}</tr>`;
-  cats.forEach((cat,ri)=>{
-    html += `<tr><td class="rowlabel">${cat}</td>`;
-    PLATFORMS.forEach((p,ci)=>{
-      const v = matrix[ri][ci];
-      let bg = '#fff';
-      if(v!=null && v>0){
-        const intensity = Math.min(1, v/max);
-        bg = `rgba(47,122,114,${0.12+intensity*0.75})`;
+  // Now build a territorial summary by circunscripcion (1..11)
+  const circNames = [];
+  for(let i=1;i<=11;i++) circNames.push('Circunscripción '+i);
+  // compute counts per circunscripcion
+  const map = {};
+  data.forEach(r=>{
+    let circ = r.circunscripcion && r.circunscripcion!==NA ? r.circunscripcion : null;
+    if(!circ && r.ubicacion && r.ubicacion!==NA){
+      const m = r.ubicacion.match(/\b(\d{1,2})\b/);
+      if(m){
+        const n = parseInt(m[1]); if(n>=1 && n<=11) circ = 'Circunscripción '+n;
       }
-      html += `<td class="cell" style="background:${bg};">${v!=null && v>0 ? v : ''}</td>`;
-    });
-    html += `</tr>`;
+    }
+    if(!circ) circ = 'No asignada';
+    if(!map[circ]) map[circ] = {count:0, interacciones:0, categorias:{}};
+    map[circ].count += 1;
+    map[circ].interacciones += (r.interacciones||0);
+    map[circ].categorias[r.categoria] = (map[circ].categorias[r.categoria]||0)+1;
   });
-  document.getElementById('heatmapTable').innerHTML = cats.length ? html : '<tr><td>No hay datos suficientes para construir el mapa de calor.</td></tr>';
+
+  // compute thresholds for intensity based on counts
+  const counts = Object.values(map).map(m=>m.count).filter(Boolean).sort((a,b)=>a-b);
+  const lowThresh = counts.length? counts[Math.floor(counts.length*0.33)] : 0;
+  const highThresh = counts.length? counts[Math.floor(counts.length*0.66)] : 0;
+
+  let html = `<tr><th>Circunscripción</th><th>Intensidad (calor)</th><th>Publicaciones</th><th>Interacciones</th><th>Temas dominantes</th></tr>`;
+  const rows = Object.keys(map).length? Object.keys(map) : circNames;
+  rows.forEach(c=>{
+    const stat = map[c] || {count:0, interacciones:0, categorias:{}};
+    let intensity='Bajo';
+    if(stat.count>highThresh) intensity='Alto';
+    else if(stat.count>lowThresh) intensity='Medio';
+    const catEntries = Object.entries(stat.categorias).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>`${e[0]} (${e[1]})`).join(', ');
+    html += `<tr><td class="rowlabel">${c}</td><td>${intensity}</td><td>${stat.count||''}</td><td>${stat.interacciones||''}</td><td>${catEntries||''}</td></tr>`;
+  });
+  document.getElementById('heatmapTable').innerHTML = html;
 }
 
 function renderPlatformPanel(tabId, dataAll){
   const platName = tabId==='instagram'?'Instagram':tabId==='facebook'?'Facebook':'TikTok';
   const panel = document.getElementById('panel-'+tabId);
   const data = dataAll.filter(d=>d.plataforma===platName);
-  const cats = {};
-  data.forEach(d=>cats[d.categoria]=(cats[d.categoria]||0)+1);
-  const catEntries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
-  const hashtagAll = data.map(d=>d.hashtags).filter(h=>h && h!==NA).join(' ');
-  const trends = computeTrends(data, 14);
-
   if(data.length===0){
     panel.innerHTML = `
       <section class="block">
@@ -581,36 +664,89 @@ function renderPlatformPanel(tabId, dataAll){
     return;
   }
 
-  const engRow = (label,key)=>{
-    const vals = data.map(d=>d[key]).filter(x=>x!=null);
-    return `<div class="kpi"><div class="v">${vals.length?vals.reduce((a,b)=>a+b,0):NA}</div><div class="l">${label}</div></div>`;
-  };
+  // common KPIs
+  const totalPublicaciones = data.length;
+  const sumInteractions = data.map(d=>d.interacciones||0).reduce((a,b)=>a+b,0);
+  const sumComments = data.map(d=>d.comentarios||0).reduce((a,b)=>a+b,0);
+  const sumShares = data.map(d=>d.compartidos||0).reduce((a,b)=>a+b,0);
+  const sumViews = data.map(d=>d.visualizaciones||0).reduce((a,b)=>a+b,0);
 
+  // platform-specific analyses
+  let specificHtml = '';
+  if(platName==='Facebook'){
+    // sentiment distribution
+    const sentiments = {};
+    data.forEach(d=>{ const s = (d.tono&&d.tono!==NA)? d.tono.toLowerCase() : 'no disponible'; sentiments[s] = (sentiments[s]||0)+1; });
+    const ageBuckets = {'<25':0,'25-34':0,'35-44':0,'45-54':0,'55+':0,'No disponible':0};
+    data.forEach(d=>{
+      const a = d.edad && d.edad!==NA ? String(d.edad).replace(/[^0-9]/g,'') : null;
+      if(a){ const n = parseInt(a); if(n<25) ageBuckets['<25']++; else if(n<35) ageBuckets['25-34']++; else if(n<45) ageBuckets['35-44']++; else if(n<55) ageBuckets['45-54']++; else ageBuckets['55+']++; }
+      else ageBuckets['No disponible']++;
+    });
+    specificHtml = `<div class="card"><h3 class="disp" style="margin:0 0 8px 0;">Análisis en Facebook</h3>
+      <div class="kpi-row" style="grid-template-columns:repeat(5,1fr);margin-bottom:10px;">
+        <div class="kpi"><div class="v">${totalPublicaciones}</div><div class="l">Publicaciones</div></div>
+        <div class="kpi"><div class="v">${sumInteractions||0}</div><div class="l">Interacciones</div></div>
+        <div class="kpi"><div class="v">${sumComments||0}</div><div class="l">Comentarios</div></div>
+        <div class="kpi"><div class="v">${sumShares||0}</div><div class="l">Compartidos</div></div>
+        <div class="kpi"><div class="v">${sumViews||0}</div><div class="l">Visualizaciones</div></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;">
+          <div class="sec-head"><h2 style="font-size:.95rem;">Sentimiento reportado</h2></div>
+          <ul class="clean">${Object.entries(sentiments).map(e=>`<li>${e[0]} — ${e[1]}</li>`).join('')}</ul>
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <div class="sec-head"><h2 style="font-size:.95rem;">Demografía por edad</h2></div>
+          <ul class="clean">${Object.entries(ageBuckets).map(e=>`<li>${e[0]} — ${e[1]}</li>`).join('')}</ul>
+        </div>
+      </div>
+    </div>`;
+  } else if(platName==='Instagram'){
+    // reels / stories / stickers
+    const reels = data.filter(d=>d.tipo_contenido && d.tipo_contenido.toLowerCase().includes('reel')).length;
+    const stories = data.filter(d=>d.tipo_contenido && d.tipo_contenido.toLowerCase().includes('story')).length;
+    // stickers detection (search keywords)
+    const stickerKeywords = ['sticker','encuesta','pregunta','quiz','sticker','poll','emoji slider'];
+    let stickerCount = 0;
+    data.forEach(d=>{ const t = (d.texto||'').toLowerCase(); if(stickerKeywords.some(k=>t.includes(k))) stickerCount++; });
+    const saves = data.map(d=>d.guardados||0).reduce((a,b)=>a+b,0);
+    specificHtml = `<div class="card"><h3 class="disp" style="margin:0 0 8px 0;">Análisis en Instagram</h3>
+      <div class="kpi-row" style="grid-template-columns:repeat(5,1fr);margin-bottom:10px;">
+        <div class="kpi"><div class="v">${totalPublicaciones}</div><div class="l">Publicaciones</div></div>
+        <div class="kpi"><div class="v">${reels}</div><div class="l">Reels</div></div>
+        <div class="kpi"><div class="v">${stories}</div><div class="l">Stories</div></div>
+        <div class="kpi"><div class="v">${saves||0}</div><div class="l">Guardados (suma)</div></div>
+        <div class="kpi"><div class="v">${stickerCount}</div><div class="l">Uso stickers</div></div>
+      </div>
+      <div><b>Top hashtags detectados:</b> ${(uniq(data.flatMap(d=>{ return (d.hashtags && d.hashtags!==NA)? d.hashtags.split(/[;,\n]+/).map(s=>s.trim()).flatMap(s=>extractHashtags(s)) : extractHashtags(d.texto); })).slice(0,10).join(', ')||'Dato no disponible'}</div>
+    </div>`;
+  } else { // TikTok
+    const avgView = data.filter(d=>d.visualizaciones!=null).map(d=>d.visualizaciones).reduce((a,b)=>a+b,0);
+    const cntView = data.filter(d=>d.visualizaciones!=null).length;
+    const avgPer = cntView? Math.round(avgView/cntView) : NA;
+    // top audios
+    const audios = {};
+    data.forEach(d=>{ const a = (d.audio && d.audio!==NA)? d.audio : ''; if(a){ audios[a] = (audios[a]||0)+1; } });
+    const topAudios = Object.entries(audios).sort((a,b)=>b[1]-a[1]).slice(0,8).map(e=>`${e[0]} (${e[1]})`).join(', ');
+    specificHtml = `<div class="card"><h3 class="disp" style="margin:0 0 8px 0;">Análisis en TikTok</h3>
+      <div class="kpi-row" style="grid-template-columns:repeat(5,1fr);margin-bottom:10px;">
+        <div class="kpi"><div class="v">${totalPublicaciones}</div><div class="l">Publicaciones</div></div>
+        <div class="kpi"><div class="v">${sumShares||0}</div><div class="l">Compartidos</div></div>
+        <div class="kpi"><div class="v">${avgPer}</div><div class="l">Visualizaciones promedio</div></div>
+        <div class="kpi"><div class="v">${sumInteractions||0}</div><div class="l">Interacciones</div></div>
+        <div class="kpi"><div class="v">${cntView}</div><div class="l">Registros con visualizaciones</div></div>
+      </div>
+      <div><b>Top audios:</b> ${topAudios||'Dato no disponible'}</div>
+    </div>`;
+  }
+
+  // assemble panel
   panel.innerHTML = `
     <section class="block">
       <div class="sec-head"><h2>${platName} Radar</h2></div>
-      <div class="kpi-row" style="grid-template-columns:repeat(5,1fr);">
-        <div class="kpi"><div class="v">${data.length}</div><div class="l">Publicaciones</div></div>
-        ${engRow('Interacciones','interacciones')}
-        ${engRow('Comentarios','comentarios')}
-        ${engRow('Compartidos','compartidos')}
-        ${engRow('Visualizaciones','visualizaciones')}
-      </div>
-      <div class="grid2">
-        <div class="card">
-          <h3 class="disp" style="font-size:.95rem;margin-top:0;">Temas principales</h3>
-          <ul class="clean">${catEntries.map(e=>`<li>${e[0]} — ${e[1]} registro(s)</li>`).join('') || '<li>Datos insuficientes.</li>'}</ul>
-        </div>
-        <div class="card">
-          <h3 class="disp" style="font-size:.95rem;margin-top:0;">Hashtags disponibles</h3>
-          <p>${hashtagAll.trim() ? hashtagAll : 'Datos insuficientes para establecer una tendencia.'}</p>
-        </div>
-      </div>
-      <div class="card" style="margin-top:16px;">
-        <h3 class="disp" style="font-size:.95rem;margin-top:0;">Tendencias en ${platName}</h3>
-        <div class="trend-grid">${trends.length ? trends.map(t=>`<div class="trend-card"><div class="tt">${t.tema}</div><div class="meta">${t.curCount} reciente(s) / ${t.prevCount} anterior(es)</div><span class="trend-tag ${t.tag}">${t.label}</span></div>`).join('') : '<div class="empty-state">Datos insuficientes para establecer una tendencia.</div>'}</div>
-      </div>
-      <div class="card" style="margin-top:16px;">
+      ${specificHtml}
+      <div class="card" style="margin-top:12px;">
         <h3 class="disp" style="font-size:.95rem;margin-top:0;">Publicaciones relevantes / noticias relacionadas</h3>
         <div class="news-list">${data.map(d=>`
           <div class="news-card">
@@ -640,7 +776,7 @@ function renderNoticias(data){
         <div>
           <span class="badge tag">${d.categoria}</span>
           <span class="badge plat">${d.plataforma}</span>
-          ${d.requiere_verificacion==='Requiere verificación'?'<span class="badge warn">Requiere verificación</span>':d.requiere_verificacion==='Respaldada'?'<span class="badge ok">Respaldada</span>':'<span class="badge gray">Información insuficiente</span>'}
+          ${d.requiere_verificacion==='Requiere verificación'?'<span class="badge warn">Requiere verificación</span>':d.requiere_verificacion==='Respaldada'?'<span class="badge ok">Respaldada</span>':''}
         </div>
         <span class="date">${d.fecha||d.fecha_raw}</span>
       </div>
@@ -675,20 +811,29 @@ function renderNarrativeDetail(data){
   const box = document.getElementById('narrativeDetail');
   if(!selectedNode){ box.innerHTML = '<div class="nav-hint">Selecciona un nodo para ver el detalle de sus registros.</div>'; return; }
   const rows = data.filter(d=>d.categoria===selectedNode);
+  // strengths: positive tone share, engagement average
+  const positives = rows.filter(r=>r.tono && r.tono.toLowerCase().includes('pos')).length;
+  const engSum = rows.map(r=>r.interacciones||0).reduce((a,b)=>a+b,0);
+  const avgEng = rows.length? Math.round(engSum/rows.length) : 0;
+  const suggestedTone = positives/rows.length>0.5 ? 'Propositivo / informativo' : 'Empático / pedagógico';
   box.innerHTML = `
     <h3 class="disp" style="font-size:1rem;">${selectedNode} <span class="nav-hint">(${rows.length} registro(s))</span></h3>
-    <div class="table-scroll"><table class="data-table">
-      <tr><th>Fecha</th><th>Subtema</th><th>Plataforma</th><th>Fuente</th><th>Tendencia</th><th>Confianza dato</th><th>URL</th></tr>
-      ${rows.map(r=>`<tr>
-        <td>${r.fecha||r.fecha_raw}</td>
-        <td>${r.subtema}</td>
-        <td>${r.plataforma}</td>
-        <td>${r.fuente}</td>
-        <td>${r.tendencia}</td>
-        <td>${r.nivel_relevancia!=null?r.nivel_relevancia:NA}</td>
-        <td>${r.url!==NA?`<a href="${r.url}" target="_blank" rel="noopener">Ver</a>`:NA}</td>
-      </tr>`).join('')}
-    </table></div>`;
+    <div class="card">
+      <p><b>Fortalezas detectadas:</b> ${positives} registro(s) con tono positivo; engagement promedio aproximado: ${avgEng}.</p>
+      <p><b>Tono sugerido:</b> ${suggestedTone}</p>
+      <div class="table-scroll"><table class="data-table">
+        <tr><th>Fecha</th><th>Subtema</th><th>Plataforma</th><th>Fuente</th><th>Tendencia</th><th>Confianza dato</th><th>URL</th></tr>
+        ${rows.map(r=>`<tr>
+          <td>${r.fecha||r.fecha_raw}</td>
+          <td>${r.subtema}</td>
+          <td>${r.plataforma}</td>
+          <td>${r.fuente}</td>
+          <td>${r.tendencia}</td>
+          <td>${r.nivel_relevancia!=null?r.nivel_relevancia:NA}</td>
+          <td>${r.url!==NA?`<a href="${r.url}" target="_blank" rel="noopener">Ver</a>`:NA}</td>
+        </tr>`).join('')}
+      </table></div>
+    </div>`;
 }
 
 function renderVerificacion(data){
@@ -704,21 +849,17 @@ function renderVerificacion(data){
     const icon = d.requiere_verificacion==='Respaldada'?'🟢':d.requiere_verificacion==='Requiere verificación'?'🟡':d.requiere_verificacion==='Presenta contradicciones'?'🔴':'⚪';
     return `<div class="alert-item">
       <span class="ico">${icon}</span>
-      <span class="txt"><span class="src">${d.fecha||d.fecha_raw} · ${d.fuente}</span> — ${d.requiere_verificacion}${d.observaciones!==NA?': '+d.observaciones:''}. ${d.url!==NA?`<a href="${d.url}" target="_blank" rel="noopener">Enlace original</a>`:'Sin URL disponible.'}</span>
+      <span class="txt"><span class="src">${d.fecha||d.fecha_raw} · ${d.fuente}</span> — ${d.requiere_verificacion}${d.observaciones!==NA?': '+d.observaciones:''}. ${d.url!==NA?`<a href="${d.url}" target="_blank" rel="noopener">Fuente</a>`:''}</span>
     </div>`;
   }).join('') : '<div class="empty-state">No hay registros en el rango filtrado.</div>';
 }
 
 function renderDatos(){
   document.getElementById('datasetMeta').textContent = `${DATA.length} registro(s) en memoria · última actualización: ${lastUpdateTs?lastUpdateTs.toLocaleString('es-EC'):'—'}.`;
-  const cols = ['fecha','plataforma','fuente','tipo_contenido','tema','categoria','tono','requiere_verificacion','url'];
+  const cols = ['fecha','plataforma','fuente','tipo_contenido','tema','categoria','tono','requiere_verificacion','circunscripcion','ubicacion','url'];
   const tbl = document.getElementById('fullTable');
   tbl.innerHTML = `<tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>` +
-    DATA.map(d=>`<tr>${cols.map(c=>{
-      let v = c==='fecha' ? (d.fecha||d.fecha_raw) : d[c];
-      if(c==='url' && v!==NA) return `<td><a href="${v}" target="_blank" rel="noopener">Ver</a></td>`;
-      return `<td>${v}</td>`;
-    }).join('')}</tr>`).join('');
+    DATA.map(d=>`<tr>${cols.map(c=>{ let v = c==='fecha' ? (d.fecha||d.fecha_raw) : d[c]; if(c==='url' && v!==NA) return `<td><a href="${v}" target="_blank" rel="noopener">Ver</a></td>`; return `<td>${v}</td>`; }).join('')}</tr>`).join('');
 }
 
 function renderMetodologia(){
@@ -729,8 +870,8 @@ function renderMetodologia(){
       <li><b>${DATA.length} registro(s)</b> en el conjunto actual: una muestra reducida no permite conclusiones estadísticamente generalizables.</li>
       <li><b>${noTono} registro(s)</b> sin tono clasificado en el dato de origen.</li>
       <li><b>${noEng} registro(s)</b> sin datos de interacciones, comentarios, compartidos o visualizaciones.</li>
-      <li>Las tendencias, el mapa de calor y las comparaciones por plataforma dependen enteramente de lo que traiga el CSV cargado; columnas ausentes se muestran como "Dato no disponible" y no se completan con estimaciones.</li>
-      <li>El tono recomendado para comunicación pública se calcula con reglas heurísticas visibles en este documento, no mediante un modelo de lenguaje generativo, para evitar dependencias externas no verificables.</li>
+      <li>El mapa de calor requiere idealmente una columna 'circunscripcion' en el CSV para asignaciones fiables; si no existe se intentan heurísticos sobre 'ubicacion'.</li>
+      <li>Las tendencias, el mapa de calor y las comparaciones por plataforma dependen enteramente de lo que traiga el CSV cargado; columnas ausentes se muestran como "Dato no disponible" y no se estiman valores.</li>
       <li>La actualización de datos ocurre al cargar un archivo CSV manualmente; este entorno no mantiene una conexión en tiempo real a redes sociales o medios.</li>
     </ul>`;
 }
@@ -742,8 +883,6 @@ function applyConfig(){
   root.setProperty('--accent', document.getElementById('cfg-accent').value);
   root.setProperty('--paper', document.getElementById('cfg-bg').value);
   root.setProperty('--text', document.getElementById('cfg-text').value);
-  root.setProperty('--font-title', document.getElementById('cfg-fonttitle').value);
-  root.setProperty('--font-body', document.getElementById('cfg-fontbody').value);
 }
 
 loadSeed();
